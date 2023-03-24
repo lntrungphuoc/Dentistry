@@ -19,6 +19,17 @@ class HttpServices implements IHttpServices {
     return response;
   }
 
+  Future<Response> postRequest(String url, Object data) async {
+    Response response;
+    try {
+      response = await _dio.post(BASE_URL + url, data: data);
+    } on DioError catch (e) {
+      print(e);
+      throw Exception(e.message);
+    }
+    return response;
+  }
+
   initializeInterceptors() {
     _dio.interceptors.add(InterceptorsWrapper(onError: (e, handler) {
       print(e.message);
