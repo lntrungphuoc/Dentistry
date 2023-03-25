@@ -283,7 +283,7 @@ class _HomeViewState extends State<HomeView>
                                     style: OutlinedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(15.0))),
+                                                BorderRadius.circular(10.0))),
                                     onPressed: () {
                                       Get.toNamed(listCategory[index]['path']
                                           .toString());

@@ -63,7 +63,7 @@ class _LoginViewState extends State<LoginView> {
                   height: 10,
                 ),
                 const Text(
-                  "Sử dụng mã sổ sức khỏe để truy cập tài khoản của bạn",
+                  "Sử dụng số CCCD/CMND để truy cập tài khoản của bạn",
                   style: TextStyle(color: Colors.grey),
                 ),
                 const SizedBox(
@@ -95,7 +95,7 @@ class _LoginViewState extends State<LoginView> {
                                   prefixIcon: Icon(Icons.person),
                                   border: InputBorder.none,
                                   contentPadding: EdgeInsets.all(0),
-                                  labelText: 'Tài khoản'),
+                                  labelText: 'CCCD/CMND'),
                             ),
                           ),
                         ),

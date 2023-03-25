@@ -21,7 +21,6 @@ class MakeAppointmentRepository implements IMakeAppointmentRepository {
     try {
       final response = await _httpServices.postRequest(
           "${BASE_URL}/create", appointmentRequest.toJson());
-      print(response.data);
       if (response.statusCode == 200) {
         status = true;
       }

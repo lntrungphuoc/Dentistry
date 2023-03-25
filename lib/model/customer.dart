@@ -40,7 +40,7 @@ class Customer {
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
     createdBy = json['createdBy'];
     modifiedBy = json['modifiedBy'];
-    eHealthBooks = EHealthBook.fromJson(json['eHealthBooks']);
+    eHealthBooks = json['eHealthBooks'] == null ? null : EHealthBook.fromJson(json['eHealthBooks']);
   }
 
   Map<String, dynamic> toJson() {
