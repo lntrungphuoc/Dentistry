@@ -41,7 +41,7 @@ class LoginController extends GetxController {
           cccd: userNameController.text, password: passwordController.text);
       var customer = await _customerRepository.login(loginRequest);
       if (customer != null) {
-        SecureStorage.saveLoginData(customer.customerName);
+        SecureStorage.saveLoginData(customer);
 
         // Get.snackbar(
         //   'Đăng nhập thành công',

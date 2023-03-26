@@ -52,11 +52,11 @@ class Customer {
     _data['password'] = password;
     _data['cccd'] = cccd;
     _data['bhyt'] = bhyt;
-    _data['createdDate'] = createdDate;
-    _data['modifiedDate'] = modifiedDate;
+    _data['createdDate'] = createdDate == null ? null : createdDate.toIso8601String();
+    _data['modifiedDate'] = modifiedDate == null ? null : modifiedDate!.toIso8601String();
     _data['createdBy'] = createdBy;
     _data['modifiedBy'] = modifiedBy;
-    _data['eHealthBooks'] = eHealthBooks!.toJson();
+    _data['eHealthBooks'] = eHealthBooks == null ? null : eHealthBooks!.toJson();
     return _data;
   }
 }

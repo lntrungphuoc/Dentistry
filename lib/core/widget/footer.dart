@@ -69,6 +69,12 @@ getFooter() {
                       } else {
                         Get.toNamed(tabItems[index]['url'].toString());
                       }
+                    } else if (index == 2) {
+                      if (await SecureStorage.getLoggedInUser() != null) {
+                        Get.toNamed("/health_book");
+                      } else {
+                        Get.toNamed("/login");
+                      }
                     } else {
                       Get.toNamed(tabItems[index]['url'].toString());
                     }

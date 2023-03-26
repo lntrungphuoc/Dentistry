@@ -16,9 +16,9 @@ class SystemState extends GetxController {
 
   RxString userName = "".obs;
   void changeUserName() async {
-    var loggedInName = await SecureStorage.getLoggedInUser();
-    if (loggedInName != null) {
-      userName.value = loggedInName;
+    var customer = await SecureStorage.getLoggedInUser();
+    if (customer != null) {
+      userName.value = customer.customerName;
     }
     else {
       userName.value = "";
