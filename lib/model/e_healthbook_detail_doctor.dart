@@ -7,11 +7,11 @@ class EHealthBookDetailDoctor {
     required this.idDoctor,
     required this.idEHealthBookDetail,
     required this.createdDate,
-     this.modifiedDate,
+    this.modifiedDate,
     required this.createdBy,
-     this.modifiedBy,
+    this.modifiedBy,
     required this.doctor,
-    required this.eHealthBookDetail,
+    this.eHealthBookDetail,
   });
   late final int id;
   late final int idDoctor;
@@ -21,18 +21,22 @@ class EHealthBookDetailDoctor {
   late final int createdBy;
   late final int? modifiedBy;
   late final Doctor doctor;
-  late final EHealthBookDetail eHealthBookDetail;
-  
-  EHealthBookDetailDoctor.fromJson(Map<String, dynamic> json){
+  late final EHealthBookDetail? eHealthBookDetail;
+
+  EHealthBookDetailDoctor.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     idDoctor = json['idDoctor'];
     idEHealthBookDetail = json['idEHealthBookDetail'];
     createdDate = DateTime.parse(json['createdDate']);
-    modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
+    modifiedDate = json['modifiedDate'] == null
+        ? null
+        : DateTime.parse(json['modifiedDate']);
     createdBy = json['createdBy'];
     modifiedBy = json['modifiedBy'];
     doctor = Doctor.fromJson(json['doctor']);
-    eHealthBookDetail = EHealthBookDetail.fromJson(json['eHealthBookDetail']);
+    eHealthBookDetail = json['eHealthBookDetail'] == null
+        ? null
+        : EHealthBookDetail.fromJson(json['eHealthBookDetail']);
   }
 
   Map<String, dynamic> toJson() {
@@ -45,7 +49,7 @@ class EHealthBookDetailDoctor {
     _data['createdBy'] = createdBy;
     _data['modifiedBy'] = modifiedBy;
     _data['doctor'] = doctor.toJson();
-    _data['eHealthBookDetail'] = eHealthBookDetail.toJson();
+    _data['eHealthBookDetail'] = eHealthBookDetail == null ? null : eHealthBookDetail!.toJson();
     return _data;
   }
 }

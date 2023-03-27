@@ -28,7 +28,7 @@ class Attachment {
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
     createdBy = json['createdBy'];
     modifiedBy = json['modifieddBy'];
-    eHealthBookDetail = EHealthBookDetail.fromJson(json['eHealthBookDetail']);
+    eHealthBookDetail = json['eHealthBookDetail'] == null ? null : EHealthBookDetail.fromJson(json['eHealthBookDetail']);
   }
 
   Map<String, dynamic> toJson() {

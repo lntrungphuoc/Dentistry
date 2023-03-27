@@ -7,6 +7,8 @@ import 'package:app_dentristy_mobile/feature/account/profile/view/profile_view.d
 import 'package:app_dentristy_mobile/feature/doctor/binding/doctor_binding.dart';
 import 'package:app_dentristy_mobile/feature/doctor/view/doctor_detail_view.dart';
 import 'package:app_dentristy_mobile/feature/doctor/view/list_doctor_view.dart';
+import 'package:app_dentristy_mobile/feature/health_book/binding/health_book_biding.dart';
+import 'package:app_dentristy_mobile/feature/health_book_detail/binding/health_book_detail_binding.dart';
 import 'package:app_dentristy_mobile/feature/health_book_detail/view/health_book_detail_view.dart';
 import 'package:app_dentristy_mobile/feature/make-appointment/binding/make_appointment_binding.dart';
 import 'package:app_dentristy_mobile/feature/make-appointment/view/make-appointment-view.dart';
@@ -65,9 +67,9 @@ class MyApp extends StatelessWidget {
             name: '/make_appointment',
             page: () => MakeAppointmentView(),
             binding: MakeAppointmentBinding()),
-        GetPage(name: '/health_book', page: () => const HealthBookView()),
+        GetPage(name: '/health_book', page: () => const HealthBookView(), binding: HealthBookBinding()),
         GetPage(
-            name: '/health_book_detail', page: () => const HealthBookDetailView()),
+            name: '/health_book_detail', page: () => const HealthBookDetailView(), binding: HealthBookDetailBinding()),
         GetPage(name: '/splash', page: () => const SplashView()),
         GetPage(
             name: '/login', page: () => LoginView(), binding: LoginBinding()),

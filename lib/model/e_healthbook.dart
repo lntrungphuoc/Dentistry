@@ -13,7 +13,7 @@ class EHealthBook {
     required this.modifiedDate,
     required this.createdBy,
     required this.modifiedBy,
-    required this.eHealthBookDetails,
+    this.eHealthBookDetails,
     required this.eHealthBookServices,
     required this.clinic,
     required this.customer,
@@ -26,21 +26,21 @@ class EHealthBook {
   late final DateTime? modifiedDate;
   late final int createdBy;
   late final int? modifiedBy;
-  late final List<EHealthBookDetail> eHealthBookDetails;
+  late final List<EHealthBookDetail>? eHealthBookDetails;
   late final List<EHealthBookService> eHealthBookServices;
   late final Clinic clinic;
   late final Customer customer;
   
   EHealthBook.fromJson(Map<String, dynamic> json){
     id = json['id'];
-    totalFee = json['totalFee'];
+    totalFee = double.parse(json['totalFee'].toString());
     idClinic = json['idClinic'];
     idCustomer = json['idCustomer'];
     createdDate = DateTime.parse(json['createdDate']);
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
     createdBy = json['createdBy'];
-    modifiedBy = json['modifiedBy'];
-    eHealthBookDetails = List.from(json['eHealthBookDetails']).map((e)=>EHealthBookDetail.fromJson(e)).toList();
+    modifiedBy = json['modifiedBy'] == null ? null : json['modifiedBy'];
+    eHealthBookDetails = json['eHealthBookDetails'] == null ? null : List.from(json['eHealthBookDetails']).map((e)=>EHealthBookDetail.fromJson(e)).toList();
     eHealthBookServices = List.from(json['eHealthBookServices']).map((e)=>EHealthBookService.fromJson(e)).toList();
     clinic = Clinic.fromJson(json['clinic']);
     customer = Customer.fromJson(json['customer']);
@@ -56,7 +56,7 @@ class EHealthBook {
     _data['modifiedDate'] = modifiedDate;
     _data['createdBy'] = createdBy;
     _data['modifiedBy'] = modifiedBy;
-    _data['eHealthBookDetails'] = eHealthBookDetails.map((e) => e.toJson()).toList();
+    _data['eHealthBookDetails'] = eHealthBookDetails!.map((e) => e.toJson()).toList();
     _data['eHealthBookServices'] = eHealthBookServices.map((e)=>e.toJson()).toList();
     _data['clinic'] = clinic.toJson();
     _data['customer'] = customer.toJson();

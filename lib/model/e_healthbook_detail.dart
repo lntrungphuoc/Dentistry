@@ -37,10 +37,10 @@ class EHealthBookDetail {
   
   EHealthBookDetail.fromJson(Map<String, dynamic> json){
     id = json['id'];
-    checkUpDate = json['checkUpDate'];
+    checkUpDate = DateTime.parse(json['checkUpDate']);
     diagnose = json['diagnose'];
     medicine = json['medicine'];
-    reExaminationDate = json['reExaminationDate'];
+    reExaminationDate = DateTime.parse(json['reExaminationDate']);
     idEHealthBook = json['idEHealthBook'];
     createdDate = DateTime.parse(json['createdDate']);
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
