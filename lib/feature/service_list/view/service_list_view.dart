@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_dentristy_mobile/core/widget/search_box.dart';
 import 'package:app_dentristy_mobile/feature/service_list/view/service_detail_view.dart';
 import 'package:app_dentristy_mobile/theme/light_color.dart';
@@ -11,8 +13,35 @@ import 'package:get/get.dart';
 import '../../../model/service.dart';
 import '../controller/service_controller.dart';
 
-class ServiceListView extends StatelessWidget {
+class ServiceListView extends StatefulWidget {
   const ServiceListView({super.key});
+
+  @override
+  State<ServiceListView> createState() => _ServiceListViewState();
+}
+
+class _ServiceListViewState extends State<ServiceListView> {
+  Timer? _debounce;
+
+  _runFilter(String value, ServiceController controller) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 300), () {
+
+      List<Service> result = [];
+      if (value.isEmpty) {
+        result = controller.listService;
+      } else {
+        result = controller.listService.value
+            .where((service) =>
+                service.name.toLowerCase().contains(value.toLowerCase()))
+            .toList();
+      }
+
+      setState(() {
+        controller.foundServices = result.obs;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +69,47 @@ class ServiceListView extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        child: SearchBox(),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Container(
+                          height: 55,
+                          margin: const EdgeInsets.only(top: 15, bottom: 20),
+                          width: MediaQuery.of(context).size.width,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(13)),
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: LightColor.grey.withOpacity(.3),
+                                blurRadius: 15,
+                                offset: const Offset(5, 5),
+                              )
+                            ],
+                          ),
+                          child: TextField(
+                            onChanged: (value) => _runFilter(value, controller),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 16),
+                              border: InputBorder.none,
+                              hintText: "Tìm kiếm",
+                              hintStyle: TextStyles.body.subTitleColor,
+                              suffixIcon: SizedBox(
+                                  width: 50,
+                                  child: const Icon(Icons.search,
+                                          color: LightColor.lightBlue)
+                                      .alignCenter
+                                      .ripple(() {},
+                                          borderRadius:
+                                              BorderRadius.circular(13))),
+                            ),
+                          ),
+                        ),
                       ),
                       Column(
-                        children: List.generate(controller.listService.length,
+                        children: List.generate(controller.foundServices.length,
                             (index) {
                           return Container(
                               margin: const EdgeInsets.symmetric(
@@ -70,17 +134,19 @@ class ServiceListView extends StatelessWidget {
                               child: Flexible(
                                 child: ListTile(
                                   onTap: () {
-                                    Get.to(ServiceDetailView(service: controller.listService[index]));
+                                    Get.to(ServiceDetailView(
+                                        service:
+                                            controller.foundServices[index]));
                                   },
                                   title: Padding(
                                     padding: const EdgeInsets.only(bottom: 3),
                                     child: Text(
-                                        controller.listService[index].name
+                                        controller.foundServices[index].name
                                             .toString(),
                                         style: TextStyles.title.bold),
                                   ),
                                   subtitle: Text(
-                                    controller.listService[index].information
+                                    controller.foundServices[index].information
                                         .toString(),
                                     style: const TextStyle(fontSize: 15),
                                     overflow: TextOverflow.ellipsis,

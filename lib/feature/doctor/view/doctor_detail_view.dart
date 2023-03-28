@@ -122,7 +122,9 @@ class DoctorDetailView extends StatelessWidget {
                             'Bác sĩ',
                             style: TextStyle(color: Colors.grey, fontSize: 15),
                           ),
-                          SizedBox(height: 5,),
+                          SizedBox(
+                            height: 5,
+                          ),
                           Text(
                             'Nguyen Van ABC',
                             style: TextStyle(
@@ -143,68 +145,68 @@ class DoctorDetailView extends StatelessWidget {
                         'Quê em là một ngôi làng nhỏ nằm dưới chân núi. Đứng ở lưng núi là có thể quan sát toàn bộ ngôi làng. Nhìn khắp làng, đâu cũng là màu xanh tươi tràn ngập sức sống. Đó là màu xanh của ruộng lúa đương thì ngon gái thơm nồng hương sữa lúa non.',
                         style: TextStyle(fontSize: 16),
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 45,
-                            width: 45,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: LightColor.grey.withAlpha(150)),
-                            child: const Icon(
-                              Icons.call,
-                              color: Colors.white,
-                            ),
-                          ).ripple(
-                            () {},
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Container(
-                            height: 45,
-                            width: 45,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: LightColor.grey.withAlpha(150)),
-                            child: const Icon(
-                              Icons.chat_bubble,
-                              color: Colors.white,
-                            ),
-                          ).ripple(
-                            () {},
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              backgroundColor: Colors.red,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
-                            onPressed: () {
-                              Get.toNamed('/make_appointment');
-                            },
-                            child: Text(
-                              "Đặt lịch hẹn",
-                              style: TextStyles.titleNormal.white,
-                            ).p(10),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
               )
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(top: 10, bottom: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 45,
+              width: 45,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: LightColor.grey.withAlpha(150)),
+              child: const Icon(
+                Icons.call,
+                color: Colors.white,
+              ),
+            ).ripple(
+              () {},
+              borderRadius: BorderRadius.circular(10),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            Container(
+              height: 45,
+              width: 45,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: LightColor.grey.withAlpha(150)),
+              child: const Icon(
+                Icons.chat_bubble,
+                color: Colors.white,
+              ),
+            ).ripple(
+              () {},
+              borderRadius: BorderRadius.circular(10),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              onPressed: () {
+                Get.toNamed('/make_appointment');
+              },
+              child: Text(
+                "Đặt lịch hẹn",
+                style: TextStyles.titleNormal.white,
+              ).p(10),
+            )
+          ],
         ),
       ),
     );
@@ -236,7 +238,8 @@ class NewWidget extends StatelessWidget {
                 builder: (context, scrollController) {
                   return Container(
                     height: AppTheme.fullHeight(context) * .5,
-                    padding: const EdgeInsets.only(left: 19, right: 19, top: 16),
+                    padding:
+                        const EdgeInsets.only(left: 19, right: 19, top: 16),
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),

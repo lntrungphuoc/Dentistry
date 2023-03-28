@@ -14,9 +14,11 @@ class ServiceController extends GetxController {
 
   late RxList<Service> listService;
 
+  late RxList<Service> foundServices;
+
   RxBool isLoading = false.obs;
 
-  getAllService() async {
+  void getAllService() async {
     showLoading();
 
     final result = await _serviceRepository.getAll();
@@ -25,6 +27,7 @@ class ServiceController extends GetxController {
 
     if (result != null) {
       listService = result.obs;
+      foundServices = listService;
     } else {
       print("No data received");
     }

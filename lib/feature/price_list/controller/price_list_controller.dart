@@ -14,6 +14,8 @@ class PriceListController extends GetxController {
 
   late RxList<PriceList> listPriceList;
 
+  late RxList<PriceList> foundPriceLists;
+
   RxBool isLoading = false.obs;
 
   getAllPriceList() async {
@@ -25,6 +27,7 @@ class PriceListController extends GetxController {
 
     if (response != null) {
       listPriceList = response.obs;
+      foundPriceLists = listPriceList;
     }
     else {
       print('No pricelist data is found');

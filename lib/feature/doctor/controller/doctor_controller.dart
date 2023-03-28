@@ -14,6 +14,8 @@ class DoctorController extends GetxController {
 
   late RxList<Doctor> listDoctor;
 
+  late RxList<Doctor> foundDoctors;
+
   RxBool isLoading = false.obs;
 
   void getAllDoctor() async {
@@ -25,6 +27,7 @@ class DoctorController extends GetxController {
 
     if (response != null) {
       listDoctor = response.obs;
+      foundDoctors = listDoctor;
     }
     else {
       print('No doctor data is found');
