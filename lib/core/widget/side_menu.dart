@@ -38,8 +38,6 @@ class _SideMenuState extends State<SideMenu> {
             Column(
               children: [
                 ListTile(
-                  leading:
-                      const CircleAvatar(child: Icon(CupertinoIcons.person)),
                   title: Obx(() {
                     systemState.changeUserName();
                     return Text(

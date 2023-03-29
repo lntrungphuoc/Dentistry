@@ -18,7 +18,7 @@ class HealthBookRepository implements IHealthBookRepostiory {
     List<EHealthBook> listHealthBook = [];
     try {
       var response =
-          await _httpServices.getRequest(BASE_URL + "?id=${idCustomer}");
+          await _httpServices.getRequest("$BASE_URL/$idCustomer");
       listHealthBook = List<EHealthBook>.from(response.data.map((e) => EHealthBook.fromJson(e)));
     } on Exception catch (e) {
       print(e);

@@ -110,10 +110,11 @@ class HealthBookView extends StatelessWidget {
   int rowCount(controller) {
     int count = 0;
     for (int i = 0; i < controller.listHealthBook.length; i++) {
-      count = count > controller.listHealthBook.length
+      count = count > controller.listHealthBook[i].eHealthBookServices.length
           ? count
-          : controller.listHealthBook.length;
+          : controller.listHealthBook[i].eHealthBookServices.length;
     }
+    print(count);
     return count;
   }
 }

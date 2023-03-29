@@ -10,14 +10,14 @@ import 'package:get/get.dart';
 import '../../../../core/repository/implementations/customer_repository.dart';
 import '../../../../core/system_state.dart';
 
-class LoginController extends GetxController {
+class CustomerLoginController extends GetxController {
   final loginFormKey = GlobalKey<FormState>();
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
 
   late ICustomerRepository _customerRepository;
 
-  LoginController() {
+  CustomerLoginController() {
     _customerRepository = Get.find<CustomerRepository>();
   }
 
@@ -41,7 +41,7 @@ class LoginController extends GetxController {
           cccd: userNameController.text, password: passwordController.text);
       var customer = await _customerRepository.login(loginRequest);
       if (customer != null) {
-        SecureStorage.saveLoginData(customer);
+        SecureStorage.saveLoggedInCustomer(customer);
 
         // Get.snackbar(
         //   'Đăng nhập thành công',

@@ -64,13 +64,13 @@ getFooter() {
                   onPressed: () async {
                     state.changeTab(index.obs);
                     if (index == 3) {
-                      if (await SecureStorage.getLoggedInUser() != null) {
+                      if (await SecureStorage.getLoggedInCustomer() != null || await SecureStorage.getLoggedInUser() != null) {
                         Get.toNamed("/profile");
                       } else {
                         Get.toNamed(tabItems[index]['url'].toString());
                       }
                     } else if (index == 2) {
-                      if (await SecureStorage.getLoggedInUser() != null) {
+                      if (await SecureStorage.getLoggedInCustomer() != null || await SecureStorage.getLoggedInUser() != null) {
                         Get.toNamed("/health_book");
                       } else {
                         Get.toNamed("/login");

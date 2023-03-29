@@ -219,10 +219,13 @@ class _HomeViewState extends State<HomeView>
                                   ),
                                   Obx(() {
                                     systemState.changeUserName();
-                                    return Text(
-                                      '${systemState.userName.value == "" ? "Chào bạn " : "Chào " + systemState.userName.value}',
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 17),
+                                    return SizedBox(
+                                      width: MediaQuery.of(context).size.width - 200,
+                                      child: Text(
+                                        '${systemState.userName.value == "" ? "Chào bạn " : "Chào " + systemState.userName.value}',
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 17),
+                                      ),
                                     );
                                   }),
                                   const Icon(
@@ -365,10 +368,13 @@ class _HomeViewState extends State<HomeView>
                                   child: Flexible(
                                     child: ListTile(
                                       onTap: () {
-                                        Get.to(ServiceDetailView(service: controller.listService[index]));
+                                        Get.to(ServiceDetailView(
+                                            service:
+                                                controller.listService[index]));
                                       },
                                       title: Padding(
-                                        padding: const EdgeInsets.only(bottom: 5),
+                                        padding:
+                                            const EdgeInsets.only(bottom: 5),
                                         child: Text(
                                             controller.listService[index].name
                                                 .toString(),

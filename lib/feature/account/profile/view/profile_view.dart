@@ -67,7 +67,7 @@ class ProfileView extends StatelessWidget {
               Obx(() {
                 systemState.changeUserName();
                 return Text(
-                  '${systemState.userName.value.toUpperCase()}',
+                  systemState.userName.value.toUpperCase(),
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 );
               }),
@@ -106,7 +106,7 @@ class ProfileView extends StatelessWidget {
                 icon: Icons.person,
                 onPress: () {},
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               OutlinedButton.icon(
@@ -118,7 +118,6 @@ class ProfileView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20))),
                 onPressed: () async {
                   await SecureStorage.logOut();
-                  var userName = await SecureStorage.getLoggedInUser();
                   var systemState = Get.put(SystemState());
                   systemState.changeUserName();
                   systemState.changeTab(0.obs);

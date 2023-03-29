@@ -21,7 +21,7 @@ class HealthBookController extends GetxController {
 
     showLoading();
     
-    var customer = await SecureStorage.getLoggedInUser();
+    var customer = await SecureStorage.getLoggedInCustomer();
 
     var response = await _healthBookRepostiory.getAll(customer.id);
 
