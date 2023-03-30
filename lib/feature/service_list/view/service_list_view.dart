@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:app_dentristy_mobile/core/widget/search_box.dart';
 import 'package:app_dentristy_mobile/feature/service_list/view/service_detail_view.dart';
@@ -8,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:app_dentristy_mobile/theme/extention.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:html/parser.dart' show parse;
 
 import '../../../model/service.dart';
 import '../controller/service_controller.dart';
@@ -21,12 +24,12 @@ class ServiceListView extends StatefulWidget {
 }
 
 class _ServiceListViewState extends State<ServiceListView> {
+  RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
   Timer? _debounce;
 
   _runFilter(String value, ServiceController controller) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 300), () {
-
       List<Service> result = [];
       if (value.isEmpty) {
         result = controller.listService;
@@ -145,9 +148,17 @@ class _ServiceListViewState extends State<ServiceListView> {
                                             .toString(),
                                         style: TextStyles.title.bold),
                                   ),
-                                  subtitle: Text(
-                                    controller.foundServices[index].information
-                                        .toString(),
+                                  subtitle:
+                                      // Html(
+                                      //   data: controller
+                                      //       .foundServices[index].information,
+                                      //   defaultTextStyle: const TextStyle(fontSize: 15),
+                                      // ),
+                                      Text(
+                                    parse(controller
+                                            .foundServices[index].information)
+                                        .documentElement
+                                        .text,
                                     style: const TextStyle(fontSize: 15),
                                     overflow: TextOverflow.ellipsis,
                                   ),

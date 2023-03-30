@@ -11,6 +11,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:rive/rive.dart';
+import 'package:html/parser.dart' show parse;
 
 import '../../../core/secure_storage.dart';
 import '../../../core/system_state.dart';
@@ -212,28 +213,34 @@ class _HomeViewState extends State<HomeView>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 40,
-                                  ),
-                                  Obx(() {
-                                    systemState.changeUserName();
-                                    return SizedBox(
-                                      width: MediaQuery.of(context).size.width - 200,
-                                      child: Text(
-                                        '${systemState.userName.value == "" ? "Chào bạn " : "Chào " + systemState.userName.value}',
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 17),
+                              Obx(() {
+                                systemState.changeUserName();
+                                return Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 40,
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          200,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            '${systemState.userName.value == "" ? "Chào bạn " : "Chào " + systemState.userName.value}',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 17),
+                                          ),
+                                          const Icon(
+                                            Icons.waving_hand,
+                                            color: Colors.amber,
+                                          ),
+                                        ],
                                       ),
-                                    );
-                                  }),
-                                  const Icon(
-                                    Icons.waving_hand,
-                                    color: Colors.amber,
-                                  ),
-                                ],
-                              ),
+                                    ),
+                                  ],
+                                );
+                              }),
                               const CircleAvatar(
                                 radius: 30,
                                 backgroundImage:
@@ -381,9 +388,10 @@ class _HomeViewState extends State<HomeView>
                                             style: TextStyles.title.bold),
                                       ),
                                       subtitle: Text(
-                                        controller
-                                            .listService[index].information
-                                            .toString(),
+                                        parse(controller
+                                            .foundServices[index].information)
+                                        .documentElement
+                                        .text,
                                         style: const TextStyle(fontSize: 15),
                                         overflow: TextOverflow.ellipsis,
                                       ),

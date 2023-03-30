@@ -4,6 +4,7 @@ import 'package:app_dentristy_mobile/theme/light_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
 import '../../../theme/text_styles.dart';
@@ -21,8 +22,8 @@ class ServiceDetailView extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: const Text(
-          "Chi tiết dịch vụ",
+        title: Text(
+          service.name,
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -37,24 +38,20 @@ class ServiceDetailView extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                Text(
-                  service.name,
-                  style: titleStyle,
-                ).vP16,
+                // Text(
+                //   service.name,
+                //   style: titleStyle,
+                // ).vP16,
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  service.information,
-                  style: TextStyle(fontSize: 16),
+                Html(
+                  data: service.information, defaultTextStyle: TextStyle(fontSize: 16),
                 ),
-
-                SizedBox(height: 20,),
-                Divider(),
-                Text('Dưới đây là đoạn văn dài cho đẹp', style: TextStyle(fontWeight: FontWeight.bold),),
-                SizedBox(height: 20,),
-                Text("Trái đất mất hàng tỉ năm để hình thành và cũng mất hàng triệu năm để sự sống được nhen nhóm và tồn tại. Nhưng trải qua hàng ngàn năm bồi đắp, sự sống ấy lại đang vô tình mất đi do chính những người đang mỉm cười vì sự sống đó.Đã đến lúc mà con người phải ý thức được sâu sắc vận mệnh và hành động của mình. Nhất là khi chúng ta còn đang sống trong thời đại của khoa học và kỹ thuật tiên tiến, càng phải ý thức hơn về việc đó. Trẻ em là người sẽ quyết định tương lai, vị thế của mỗi dân tộc trên trường quốc tế. Qua vấn đề bảo vệ, chăm sóc trẻ em, chúng ta có thể nhận ra được trình độ văn minh và phần nào bản chất của một xã hội", style: TextStyle(fontSize: 16),),
-                Text("Trái đất mất hàng tỉ năm để hình thành và cũng mất hàng triệu năm để sự sống được nhen nhóm và tồn tại. Nhưng trải qua hàng ngàn năm bồi đắp, sự sống ấy lại đang vô tình mất đi do chính những người đang mỉm cười vì sự sống đó.Đã đến lúc mà con người phải ý thức được sâu sắc vận mệnh và hành động của mình. Nhất là khi chúng ta còn đang sống trong thời đại của khoa học và kỹ thuật tiên tiến, càng phải ý thức hơn về việc đó. Trẻ em là người sẽ quyết định tương lai, vị thế của mỗi dân tộc trên trường quốc tế. Qua vấn đề bảo vệ, chăm sóc trẻ em, chúng ta có thể nhận ra được trình độ văn minh và phần nào bản chất của một xã hội", style: TextStyle(fontSize: 16),)
+                // Text(
+                //   service.information,
+                //   style: TextStyle(fontSize: 16),
+                // ),
               ],
             ),
           ),
