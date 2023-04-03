@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import '../controller/customer_login_controller.dart';
 import '../controller/user_login_controller.dart';
 
-
 class LoginView extends StatefulWidget {
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -123,34 +122,31 @@ class _LoginViewState extends State<LoginView> {
                   height: 25,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Container(
-                      alignment: Alignment.center,
-                      height: 55,
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(14),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                            )
-                          ]),
-                      child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            fixedSize:
-                                Size(MediaQuery.of(context).size.width, 55),
-                          ),
-                          onPressed: () {
-                            controller.login();
-                          },
-                          child: const Text(
-                            'Đăng nhập',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18),
-                          ))),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextButton(
+                      onPressed: () {
+                        controller.login();
+                      },
+                      style: ButtonStyle(
+                          fixedSize: MaterialStateProperty.all(
+                              Size(MediaQuery.of(context).size.width, 55)),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue),
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(14))),
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.symmetric(vertical: 14))),
+                      child: const Text(
+                        'Đăng nhập',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18),
+                      )),
                 )
               ],
             ),
@@ -241,34 +237,31 @@ class _LoginViewState extends State<LoginView> {
                   height: 25,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Container(
-                      alignment: Alignment.center,
-                      height: 55,
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(14),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                            )
-                          ]),
-                      child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            fixedSize:
-                                Size(MediaQuery.of(context).size.width, 55),
-                          ),
-                          onPressed: () {
-                            userLoginController.login();
-                          },
-                          child: const Text(
-                            'Đăng nhập',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18),
-                          ))),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextButton(
+                      onPressed: () {
+                        userLoginController.login();
+                      },
+                      style: ButtonStyle(
+                          fixedSize: MaterialStateProperty.all(
+                              Size(MediaQuery.of(context).size.width, 55)),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue),
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(14))),
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.symmetric(vertical: 14))),
+                      child: const Text(
+                        'Đăng nhập',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18),
+                      )),
                 )
               ],
             ),
@@ -322,7 +315,13 @@ class _LoginViewState extends State<LoginView> {
                     height: 290,
                     child: TabBarView(children: [_tabCustomer, _tabEmployee]),
                   ),
-                  const Text('Hoặc'),
+                  Row(
+                    children: const [
+                      Expanded(child: Divider()),
+                      Text('Hoặc'),
+                      Expanded(child: Divider()),
+                    ],
+                  ),
                   const SizedBox(
                     height: 25,
                   ),
