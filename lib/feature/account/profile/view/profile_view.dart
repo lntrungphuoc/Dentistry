@@ -2,6 +2,7 @@ import 'package:app_dentristy_mobile/theme/light_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -36,10 +37,10 @@ class ProfileView extends StatelessWidget {
               Stack(
                 children: [
                   SizedBox(
-                    width: 120,
-                    height: 120,
+                    width: 90.w,
+                    height: 90.h,
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(120.r),
                         child: const Image(
                             image: AssetImage("assets/image/profile_2.jpg"))),
                   ),
@@ -47,12 +48,12 @@ class ProfileView extends StatelessWidget {
                     bottom: 0,
                     right: 0,
                     child: Container(
-                      width: 35,
-                      height: 35,
+                      width: 25.w,
+                      height: 25.h,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
+                          borderRadius: BorderRadius.circular(100.r),
                           color: LightColor.lightBlue),
-                      child: Icon(
+                      child: const Icon(
                         LineAwesomeIcons.alternate_pencil,
                         color: Colors.black,
                         size: 20,
@@ -61,40 +62,41 @@ class ProfileView extends StatelessWidget {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Obx(() {
                 systemState.changeUserName();
                 return Text(
                   systemState.userName.value.toUpperCase(),
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style:
+                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                 );
               }),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               SizedBox(
-                width: 200,
-                height: 50,
+                width: 180.w,
+                height: 45.h,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: LightColor.lightBlue,
                         side: BorderSide.none,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
+                            borderRadius: BorderRadius.circular(20.r))),
                     onPressed: () {},
                     child: const Text(
                       'Thay đổi thông tin',
                       style: TextStyle(fontSize: 18),
                     )),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               const Divider(),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               ProfileMenuWidget(
                 title: "Cài đặt",
@@ -106,16 +108,16 @@ class ProfileView extends StatelessWidget {
                 icon: Icons.person,
                 onPress: () {},
               ),
-              const SizedBox(
-                height: 15,
+              SizedBox(
+                height: 15.h,
               ),
               OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
-                    fixedSize: Size(150, 50),
+                    fixedSize: Size(140.w, 45.h),
                     backgroundColor: Colors.red,
                     side: BorderSide.none,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                        borderRadius: BorderRadius.circular(20.r))),
                 onPressed: () async {
                   await SecureStorage.logOut();
                   var systemState = Get.put(SystemState());
@@ -127,9 +129,9 @@ class ProfileView extends StatelessWidget {
                   Icons.logout,
                   color: Colors.white,
                 ),
-                label: const Text(
+                label: Text(
                   "Đăng xuất",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
               )
               // ProfileMenuWidget(
@@ -168,10 +170,10 @@ class ProfileMenuWidget extends StatelessWidget {
     return ListTile(
       onTap: onPress,
       leading: Container(
-        width: 40,
-        height: 40,
+        width: 20.w,
+        height: 20.h,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(100.r),
             color: LightColor.lightBlue.withOpacity(0.1)),
         child: Icon(
           icon,
@@ -180,19 +182,19 @@ class ProfileMenuWidget extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
       ),
       trailing: endIcon
           ? Container(
-              width: 30,
-              height: 30,
+              width: 30.w,
+              height: 30.h,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: BorderRadius.circular(100.r),
                 color: Colors.grey.withOpacity(0.1),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_forward_ios,
-                size: 18,
+                size: 18.sp,
                 color: Colors.grey,
               ),
             )

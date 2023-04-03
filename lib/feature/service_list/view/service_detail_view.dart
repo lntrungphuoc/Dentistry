@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../theme/text_styles.dart';
@@ -16,7 +17,7 @@ class ServiceDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle titleStyle = TextStyles.title.copyWith(fontSize: 25).bold;
+    TextStyle titleStyle = TextStyles.title.copyWith(fontSize: 25.sp).bold;
     return Scaffold(
       backgroundColor: LightColor.background,
       appBar: AppBar(
@@ -32,7 +33,7 @@ class ServiceDetailView extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Center(
@@ -43,10 +44,11 @@ class ServiceDetailView extends StatelessWidget {
                 //   style: titleStyle,
                 // ).vP16,
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Html(
-                  data: service.information, defaultTextStyle: TextStyle(fontSize: 16),
+                  data: service.information,
+                  defaultTextStyle: TextStyle(fontSize: 14.sp),
                 ),
                 // Text(
                 //   service.information,
@@ -58,61 +60,59 @@ class ServiceDetailView extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 10, top: 10),
-        child: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 45,
-                width: 45,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: LightColor.grey.withAlpha(150)),
-                child: const Icon(
-                  Icons.call,
-                  color: Colors.white,
-                ),
-              ).ripple(
-                () {},
-                borderRadius: BorderRadius.circular(10),
+        padding: EdgeInsets.symmetric(vertical: 10.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 45.h,
+              width: 45.w,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.r),
+                  color: LightColor.grey.withAlpha(150)),
+              child: const Icon(
+                Icons.call,
+                color: Colors.white,
               ),
-              const SizedBox(
-                width: 15,
+            ).ripple(
+              () {},
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+            SizedBox(
+              width: 15.w,
+            ),
+            Container(
+              height: 45.h,
+              width: 45.w,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.r),
+                  color: LightColor.grey.withAlpha(150)),
+              child: const Icon(
+                Icons.chat_bubble,
+                color: Colors.white,
               ),
-              Container(
-                height: 45,
-                width: 45,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: LightColor.grey.withAlpha(150)),
-                child: const Icon(
-                  Icons.chat_bubble,
-                  color: Colors.white,
-                ),
-              ).ripple(
-                () {},
-                borderRadius: BorderRadius.circular(10),
+            ).ripple(
+              () {},
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+            SizedBox(
+              width: 15.w,
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.r)),
               ),
-              const SizedBox(
-                width: 15,
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-                onPressed: () {
-                  Get.toNamed('/make_appointment');
-                },
-                child: Text(
-                  "Đặt lịch hẹn",
-                  style: TextStyles.titleNormal.white,
-                ).p(10),
-              ),
-            ],
-          ),
+              onPressed: () {
+                Get.toNamed('/make_appointment');
+              },
+              child: Text(
+                "Đặt lịch hẹn",
+                style: TextStyles.titleNormal.white,
+              ).p(10.sp),
+            ),
+          ],
         ),
       ),
     );

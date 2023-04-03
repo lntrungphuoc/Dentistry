@@ -19,6 +19,7 @@ import 'package:app_dentristy_mobile/feature/service_list/view/service_detail_vi
 import 'package:app_dentristy_mobile/feature/service_list/view/service_list_view.dart';
 import 'package:app_dentristy_mobile/feature/splash/view/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'feature/health_book/view/health_book_view.dart';
@@ -45,38 +46,48 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      // home: SideMenu(),
-      getPages: [
-        GetPage(name: '/home', page: () => HomeView(), binding: HomeBinding()),
-        GetPage(
-            name: '/service',
-            page: () => const ServiceListView(),
-            binding: ServiceBinding()),
-        GetPage(
-            name: '/doctor',
-            page: () => const ListDoctorView(),
-            binding: DoctorBinding()),
-        GetPage(
-            name: '/price_list',
-            page: () => const PriceListView(),
-            binding: PriceListBinding()),
-        GetPage(name: '/doctor_detail', page: () => const DoctorDetailView()),
-        GetPage(
-            name: '/make_appointment',
-            page: () => MakeAppointmentView(),
-            binding: MakeAppointmentBinding()),
-        GetPage(name: '/health_book', page: () => const HealthBookView(), binding: HealthBookBinding()),
-        GetPage(
-            name: '/health_book_detail', page: () => const HealthBookDetailView(), binding: HealthBookDetailBinding()),
-        GetPage(name: '/splash', page: () => const SplashView()),
-        GetPage(
-            name: '/login', page: () => LoginView(), binding: LoginBinding()),
-        GetPage(name: '/profile', page: () => const ProfileView()),
-        // GetPage(name: '/service_detail', page: () => ServiceDetailView())
-      ],
-      initialRoute: '/splash',
-    );
+    return ScreenUtilInit(
+      designSize: Size(360, 780),
+      builder: (context , child) {
+      return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        // home: SideMenu(),
+        getPages: [
+          GetPage(
+              name: '/home', page: () => HomeView(), binding: HomeBinding()),
+          GetPage(
+              name: '/service',
+              page: () => const ServiceListView(),
+              binding: ServiceBinding()),
+          GetPage(
+              name: '/doctor',
+              page: () => const ListDoctorView(),
+              binding: DoctorBinding()),
+          GetPage(
+              name: '/price_list',
+              page: () => const PriceListView(),
+              binding: PriceListBinding()),
+          GetPage(name: '/doctor_detail', page: () => const DoctorDetailView()),
+          GetPage(
+              name: '/make_appointment',
+              page: () => MakeAppointmentView(),
+              binding: MakeAppointmentBinding()),
+          GetPage(
+              name: '/health_book',
+              page: () => const HealthBookView(),
+              binding: HealthBookBinding()),
+          GetPage(
+              name: '/health_book_detail',
+              page: () => const HealthBookDetailView(),
+              binding: HealthBookDetailBinding()),
+          GetPage(name: '/splash', page: () => const SplashView()),
+          GetPage(
+              name: '/login', page: () => LoginView(), binding: LoginBinding()),
+          GetPage(name: '/profile', page: () => const ProfileView()),
+          // GetPage(name: '/service_detail', page: () => ServiceDetailView())
+        ],
+        initialRoute: '/splash',
+      );
+    });
   }
 }

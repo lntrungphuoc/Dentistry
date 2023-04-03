@@ -8,6 +8,7 @@ import 'package:flutter/src/painting/gradient.dart' as gradient;
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:rive/rive.dart';
@@ -139,8 +140,6 @@ class _HomeViewState extends State<HomeView>
           size: 50,
           color: LightColor.lightBlue,
         ),
-        "url":
-            "https://p7.hiclipart.com/preview/14/65/239/ico-avatar-scalable-vector-graphics-icon-doctor-with-stethoscope.jpg"
       },
       {
         "name": "Dịch vụ",
@@ -151,19 +150,16 @@ class _HomeViewState extends State<HomeView>
           size: 50,
           color: LightColor.lightBlue,
         ),
-        "url":
-            "https://www.pngitem.com/pimgs/m/449-4494152_dealer-services-services-icon-png-transparent-png-download.png"
       },
       {
         "name": "Bảng giá",
         "color": const Color.fromARGB(255, 232, 201, 238),
+        "path": "/price_list",
         "icon": const Icon(
           Icons.list_alt,
           size: 50,
           color: LightColor.lightBlue,
         ),
-        "path": "/price_list",
-        "url": "https://img.freepik.com/free-icon/list-clipboard_318-46985.jpg"
       },
       {
         "name": "Phòng khám",
@@ -174,13 +170,12 @@ class _HomeViewState extends State<HomeView>
           size: 50,
           color: LightColor.lightBlue,
         ),
-        "url": "https://cdn-icons-png.flaticon.com/512/4320/4320333.png"
       },
     ];
 
     return Obx(() {
       return controller.isLoading.isTrue
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : Material(
@@ -198,15 +193,15 @@ class _HomeViewState extends State<HomeView>
                             ],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter),
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15.r),
+                          bottomRight: Radius.circular(15.r),
                         ),
                       ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 50, left: 20, right: 20),
+                          EdgeInsets.only(top: 37.h, left: 20.w, right: 20.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -217,19 +212,21 @@ class _HomeViewState extends State<HomeView>
                                 systemState.changeUserName();
                                 return Row(
                                   children: [
-                                    const SizedBox(
-                                      width: 40,
+                                    SizedBox(
+                                      width: 40.w,
                                     ),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width -
-                                          200,
+                                          150.w,
                                       child: Row(
                                         children: [
-                                          Text(
-                                            '${systemState.userName.value == "" ? "Chào bạn " : "Chào " + systemState.userName.value}',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 17),
+                                          Flexible(
+                                            child: Text(
+                                              '${systemState.userName.value == "" ? "Chào bạn " : "Chào " + systemState.userName.value}',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 17.sp),
+                                            ),
                                           ),
                                           const Icon(
                                             Icons.waving_hand,
@@ -241,39 +238,39 @@ class _HomeViewState extends State<HomeView>
                                   ],
                                 );
                               }),
-                              const CircleAvatar(
-                                radius: 30,
+                              CircleAvatar(
+                                radius: 30.r,
                                 backgroundImage:
                                     AssetImage('assets/image/profile_2.jpg'),
                               )
                             ],
                           ),
-                          const Text('Luôn chăm sóc ',
+                          Text('Luôn chăm sóc ',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 30,
+                                  fontSize: 30.sp,
                                   color: Colors.white)),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: 10.h,
                           ),
-                          const Text('sức khỏe của bạn',
+                          Text('sức khỏe của bạn',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 30,
+                                  fontSize: 30.sp,
                                   color: Colors.white)),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: 10.h,
                           ),
-                          SearchBox(),
+                          const SearchBox(),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 20),
+                            padding: EdgeInsets.only(top: 10.h, bottom: 20.h),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text(
                                   'Categories',
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 20.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
@@ -284,16 +281,16 @@ class _HomeViewState extends State<HomeView>
                             children:
                                 List.generate(listCategory.length, (index) {
                               return Container(
-                                width: 80,
-                                height: 90,
+                                width: 70.w,
+                                height: 90.h,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
+                                  borderRadius: BorderRadius.circular(15.r),
                                 ),
                                 child: OutlinedButton(
                                     style: OutlinedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10.0))),
+                                                BorderRadius.circular(10.0.r))),
                                     onPressed: () {
                                       Get.toNamed(listCategory[index]['path']
                                           .toString());
@@ -304,8 +301,7 @@ class _HomeViewState extends State<HomeView>
                                             MainAxisAlignment.start,
                                         children: [
                                           Container(
-                                            padding:
-                                                const EdgeInsets.only(top: 5),
+                                            padding: EdgeInsets.only(top: 5.h),
                                             child: listCategory[index]['icon']
                                                 as Icon,
                                           ),
@@ -314,8 +310,8 @@ class _HomeViewState extends State<HomeView>
                                             listCategory[index]['name']
                                                 .toString(),
                                             textAlign: TextAlign.center,
-                                            style: const TextStyle(
-                                                fontSize: 14,
+                                            style: TextStyle(
+                                                fontSize: 13.sp,
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black),
                                           ))
@@ -326,24 +322,24 @@ class _HomeViewState extends State<HomeView>
                             }),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10),
+                            padding: EdgeInsets.only(top: 10.h),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
+                                Text(
                                   'Top dịch vụ',
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 20.h,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 TextButton(
                                     onPressed: () {
                                       Get.toNamed('/service');
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       "Xem tất cả",
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 16.h,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.red),
                                     ))
@@ -353,12 +349,11 @@ class _HomeViewState extends State<HomeView>
                           Column(
                             children: List.generate(3, (index) {
                               return Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 8),
+                                  margin: EdgeInsets.symmetric(vertical: 8.h),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(20)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20.r)),
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(
                                         offset: const Offset(4, 4),
@@ -381,23 +376,23 @@ class _HomeViewState extends State<HomeView>
                                       },
                                       title: Padding(
                                         padding:
-                                            const EdgeInsets.only(bottom: 5),
+                                             EdgeInsets.only(bottom: 5.h),
                                         child: Text(
                                             controller.listService[index].name
                                                 .toString(),
                                             style: TextStyles.title.bold),
                                       ),
                                       subtitle: Text(
-                                        parse(controller
-                                            .foundServices[index].information)
-                                        .documentElement
-                                        .text,
-                                        style: const TextStyle(fontSize: 15),
+                                        parse(controller.foundServices[index]
+                                                .information)
+                                            .documentElement
+                                            .text,
+                                        style: TextStyle(fontSize: 13.sp),
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       trailing: Icon(
                                         Icons.keyboard_arrow_right,
-                                        size: 30,
+                                        size: 30.sp,
                                         color: Theme.of(context).primaryColor,
                                       ),
                                     ),

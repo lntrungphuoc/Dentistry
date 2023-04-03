@@ -4,6 +4,7 @@ import 'package:app_dentristy_mobile/theme/light_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../theme/text_styles.dart';
@@ -15,14 +16,14 @@ class PriceListDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle titleStyle = TextStyles.title.copyWith(fontSize: 25).bold;
+    TextStyle titleStyle = TextStyles.title.copyWith(fontSize: 25.sp).bold;
     return Scaffold(
       backgroundColor: LightColor.background,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: const Text(
-          "Chi tiết bảng giá",
+        title: Text(
+          priceList.title,
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -31,46 +32,39 @@ class PriceListDetailView extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Center(
             child: Column(
               children: [
-                Text(
-                  priceList.title,
-                  style: titleStyle,
-                ).vP16,
+                // Text(
+                //   priceList.title,
+                //   style: titleStyle,
+                // ).vP16,
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Text(
                   priceList.content,
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 14.sp),
                 ),
-
-                SizedBox(height: 20,),
-                Divider(),
-                Text('Dưới đây là đoạn văn dài cho đẹp', style: TextStyle(fontWeight: FontWeight.bold),),
-                SizedBox(height: 20,),
-                Text("Trái đất mất hàng tỉ năm để hình thành và cũng mất hàng triệu năm để sự sống được nhen nhóm và tồn tại. Nhưng trải qua hàng ngàn năm bồi đắp, sự sống ấy lại đang vô tình mất đi do chính những người đang mỉm cười vì sự sống đó.Đã đến lúc mà con người phải ý thức được sâu sắc vận mệnh và hành động của mình. Nhất là khi chúng ta còn đang sống trong thời đại của khoa học và kỹ thuật tiên tiến, càng phải ý thức hơn về việc đó. Trẻ em là người sẽ quyết định tương lai, vị thế của mỗi dân tộc trên trường quốc tế. Qua vấn đề bảo vệ, chăm sóc trẻ em, chúng ta có thể nhận ra được trình độ văn minh và phần nào bản chất của một xã hội", style: TextStyle(fontSize: 16),),
-                Text("Trái đất mất hàng tỉ năm để hình thành và cũng mất hàng triệu năm để sự sống được nhen nhóm và tồn tại. Nhưng trải qua hàng ngàn năm bồi đắp, sự sống ấy lại đang vô tình mất đi do chính những người đang mỉm cười vì sự sống đó.Đã đến lúc mà con người phải ý thức được sâu sắc vận mệnh và hành động của mình. Nhất là khi chúng ta còn đang sống trong thời đại của khoa học và kỹ thuật tiên tiến, càng phải ý thức hơn về việc đó. Trẻ em là người sẽ quyết định tương lai, vị thế của mỗi dân tộc trên trường quốc tế. Qua vấn đề bảo vệ, chăm sóc trẻ em, chúng ta có thể nhận ra được trình độ văn minh và phần nào bản chất của một xã hội", style: TextStyle(fontSize: 16),)
               ],
             ),
           ),
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 10, top: 10),
+        padding: EdgeInsets.symmetric(vertical: 10.sp),
         child: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 45,
-                width: 45,
+                height: 45.h,
+                width: 45.w,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.r),
                     color: LightColor.grey.withAlpha(150)),
                 child: const Icon(
                   Icons.call,
@@ -78,16 +72,16 @@ class PriceListDetailView extends StatelessWidget {
                 ),
               ).ripple(
                 () {},
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.r),
               ),
-              const SizedBox(
-                width: 15,
+              SizedBox(
+                width: 15.w,
               ),
               Container(
-                height: 45,
-                width: 45,
+                height: 45.h,
+                width: 45.w,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.r),
                     color: LightColor.grey.withAlpha(150)),
                 child: const Icon(
                   Icons.chat_bubble,
@@ -95,16 +89,16 @@ class PriceListDetailView extends StatelessWidget {
                 ),
               ).ripple(
                 () {},
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.r),
               ),
-              const SizedBox(
-                width: 15,
+               SizedBox(
+                width: 15.w,
               ),
               TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.red,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(10.r)),
                 ),
                 onPressed: () {
                   Get.toNamed('/make_appointment');
@@ -112,7 +106,7 @@ class PriceListDetailView extends StatelessWidget {
                 child: Text(
                   "Đặt lịch hẹn",
                   style: TextStyles.titleNormal.white,
-                ).p(10),
+                ).p(10.sp),
               ),
             ],
           ),

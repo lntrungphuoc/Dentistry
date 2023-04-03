@@ -5,6 +5,7 @@ import 'package:app_dentristy_mobile/theme/extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../theme/light_color.dart';
@@ -64,16 +65,15 @@ class _ListDoctorViewState extends State<ListDoctorView> {
               : SingleChildScrollView(
                   child: Column(children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: Container(
-                        height: 55,
-                        margin: const EdgeInsets.only(top: 15, bottom: 20),
+                        height: 50.h,
+                        margin: EdgeInsets.only(top: 13.h, bottom: 18.h),
                         width: MediaQuery.of(context).size.width,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(13)),
+                          borderRadius: BorderRadius.all(Radius.circular(13.r)),
                           boxShadow: <BoxShadow>[
                             BoxShadow(
                               color: LightColor.grey.withOpacity(.3),
@@ -85,32 +85,33 @@ class _ListDoctorViewState extends State<ListDoctorView> {
                         child: TextField(
                           onChanged: (value) => _runFilter(value, controller),
                           decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 16),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 16.h),
                             border: InputBorder.none,
                             hintText: "Tìm kiếm",
                             hintStyle: TextStyles.body.subTitleColor,
                             suffixIcon: SizedBox(
-                                width: 50,
+                                width: 50.w,
                                 child: const Icon(Icons.search,
                                         color: LightColor.lightBlue)
                                     .alignCenter
                                     .ripple(() {},
                                         borderRadius:
-                                            BorderRadius.circular(13))),
+                                            BorderRadius.circular(13.r))),
                           ),
                         ),
                       ),
                     ),
                     ...List.generate(controller.foundDoctors.length, (index) {
                       return Container(
-                          height: 100,
+                          height: 90.h,
                           alignment: Alignment.center,
-                          margin:
-                              const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                          margin: EdgeInsets.symmetric(
+                              vertical: 7.h, horizontal: 18.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: const BorderRadius.all(Radius.circular(20)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.r)),
                             boxShadow: <BoxShadow>[
                               BoxShadow(
                                 offset: const Offset(4, 4),
@@ -132,26 +133,27 @@ class _ListDoctorViewState extends State<ListDoctorView> {
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(13)),
                                 child: Container(
-                                  height: 90,
-                                  width: 80,
+                                  height: 90.h,
+                                  width: 70.w,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(15.r),
                                   ),
                                   child: Image.asset(
                                     'assets/image/profile_2.jpg',
-                                    height: 90,
-                                    width: 80,
+                                    height: 90.h,
+                                    width: 70.w,
                                     fit: BoxFit.contain,
                                   ),
                                 ),
                               ),
                               title: Text(
-                                  controller.foundDoctors[index].name.toString(),
+                                  controller.foundDoctors[index].name
+                                      .toString(),
                                   style: TextStyles.title.bold),
                               subtitle: Text(
                                 controller.foundDoctors[index].information
                                     .toString(),
-                                style: const TextStyle(fontSize: 15),
+                                style: TextStyle(fontSize: 14.sp),
                                 overflow: TextOverflow.ellipsis,
                               ),
                               trailing: IconButton(
@@ -160,7 +162,7 @@ class _ListDoctorViewState extends State<ListDoctorView> {
                                 },
                                 icon: Icon(
                                   Icons.keyboard_arrow_right,
-                                  size: 30,
+                                  size: 30.sp,
                                   color: Theme.of(context).primaryColor,
                                 ),
                               ),

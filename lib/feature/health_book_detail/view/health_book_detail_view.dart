@@ -2,6 +2,7 @@ import 'package:app_dentristy_mobile/feature/health_book_detail/controller/healt
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -35,7 +36,7 @@ class HealthBookDetailView extends StatelessWidget {
             : SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
-                    dataRowHeight: rowCount(controller) * 30,
+                    dataRowHeight: rowCount(controller) * 30.h,
                     columns: const [
                       DataColumn(label: Text("STT")),
                       DataColumn(
