@@ -291,19 +291,10 @@ class _LoginViewState extends State<LoginView> {
               width: double.infinity,
               child: Column(
                 children: [
-                  Icon(
-                    Icons.local_hospital,
-                    size: 60.sp,
-                    color: Color.fromARGB(255, 9, 136, 239),
-                  ),
-                  Text(
-                    'HÍ AE',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w800, fontSize: 15.sp),
-                  ),
-                  SizedBox(
-                    height: 22.h,
-                  ),
+                  Image.asset("assets/image/trans_logo.png", height: 150, width: 150,),
+                  // SizedBox(
+                  //   height: 20.h,
+                  // ),
                   Text(
                     "Welcome Back!",
                     style: TextStyle(

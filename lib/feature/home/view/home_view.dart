@@ -239,7 +239,7 @@ class _HomeViewState extends State<HomeView>
                                 );
                               }),
                               CircleAvatar(
-                                radius: 30.r,
+                                radius: 25.r,
                                 backgroundImage:
                                     AssetImage('assets/image/profile_2.jpg'),
                               )

@@ -17,7 +17,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () => Get.toNamed('/home'));
+    Timer(Duration(milliseconds: 1500), () => Get.toNamed('/home'));
   }
 
   @override
@@ -35,19 +35,8 @@ class _SplashViewState extends State<SplashView> {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(
-              Icons.local_hospital,
-              size: 70,
-              color: Color.fromARGB(255, 9, 136, 239),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              'HÍ AE',
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
-            ),
+          children: [
+            Image.asset("assets/image/trans_logo.png", height: 200, width: 200,),
             CircularProgressIndicator()
           ],
         ),
