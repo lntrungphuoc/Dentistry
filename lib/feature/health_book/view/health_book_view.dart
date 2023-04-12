@@ -87,7 +87,7 @@ class _HealthBookViewState extends State<HealthBookView> {
                       title: Text(
                           DateFormat("yyyy-MM-dd")
                               .format(
-                                  controller.listHealthBook[index].createdDate)
+                                  controller.listHealthBook[index].checkUpDate)
                               .toString(),
                           style: TextStyle(fontSize: 15.sp)),
                     ),

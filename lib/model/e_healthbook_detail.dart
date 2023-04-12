@@ -6,10 +6,8 @@ import 'package:app_dentristy_mobile/model/e_healthbook_detail_service.dart';
 class EHealthBookDetail {
   EHealthBookDetail({
     required this.id,
-    required this.checkUpDate,
     required this.diagnose,
     required this.medicine,
-    required this.reExaminationDate,
     required this.idEHealthBook,
     required this.createdDate,
      this.modifiedDate,
@@ -21,10 +19,8 @@ class EHealthBookDetail {
      this.eHealthBook,
   });
   late final int id;
-  late final DateTime checkUpDate;
   late final String diagnose;
   late final String medicine;
-  late final DateTime reExaminationDate;
   late final int idEHealthBook;
   late final DateTime createdDate;
   late final DateTime? modifiedDate;
@@ -37,10 +33,8 @@ class EHealthBookDetail {
   
   EHealthBookDetail.fromJson(Map<String, dynamic> json){
     id = json['id'];
-    checkUpDate = DateTime.parse(json['checkUpDate']);
     diagnose = json['diagnose'];
     medicine = json['medicine'];
-    reExaminationDate = DateTime.parse(json['reExaminationDate']);
     idEHealthBook = json['idEHealthBook'];
     createdDate = DateTime.parse(json['createdDate']);
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
@@ -55,10 +49,8 @@ class EHealthBookDetail {
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['id'] = id;
-    _data['checkUpDate'] = checkUpDate;
     _data['diagnose'] = diagnose;
     _data['medicine'] = medicine;
-    _data['reExaminationDate'] = reExaminationDate;
     _data['idEHealthBook'] = idEHealthBook;
     _data['createdDate'] = createdDate;
     _data['modifiedDate'] = modifiedDate;

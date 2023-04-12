@@ -9,6 +9,7 @@ class EHealthBook {
     required this.totalFee,
     required this.idClinic,
     required this.idCustomer,
+    required this.checkUpDate,
     required this.createdDate,
     required this.modifiedDate,
     required this.createdBy,
@@ -22,6 +23,7 @@ class EHealthBook {
   late final double totalFee;
   late final int idClinic;
   late final int idCustomer;
+  late final DateTime checkUpDate;
   late final DateTime createdDate;
   late final DateTime? modifiedDate;
   late final int createdBy;
@@ -36,6 +38,7 @@ class EHealthBook {
     totalFee = double.parse(json['totalFee'].toString());
     idClinic = json['idClinic'];
     idCustomer = json['idCustomer'];
+    checkUpDate = DateTime.parse(json['checkUpDate']);
     createdDate = DateTime.parse(json['createdDate']);
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
     createdBy = json['createdBy'];
@@ -52,6 +55,7 @@ class EHealthBook {
     _data['totalFee'] = totalFee;
     _data['idClinic'] = idClinic;
     _data['idCustomer'] = idCustomer;
+    _data['checkUpDate'] = checkUpDate;
     _data['createdDate'] = createdDate;
     _data['modifiedDate'] = modifiedDate;
     _data['createdBy'] = createdBy;

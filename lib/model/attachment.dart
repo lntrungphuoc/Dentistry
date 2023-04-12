@@ -4,6 +4,7 @@ class Attachment {
   Attachment({
     required this.id,
     required this.url,
+    required this.fileName,
     required this.idEHealthBookDetail,
     required this.createdDate,
     this.modifiedDate,
@@ -13,6 +14,7 @@ class Attachment {
   });
   late final int id;
   late final String url;
+  late final String fileName;
   late final int idEHealthBookDetail;
   late final DateTime createdDate;
   late final DateTime? modifiedDate;
@@ -23,6 +25,7 @@ class Attachment {
   Attachment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     url = json['url'];
+    fileName = json['fileName'];
     idEHealthBookDetail = json['idEHealthBookDetail'];
     createdDate = DateTime.parse(json['createdDate']);
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
@@ -35,6 +38,7 @@ class Attachment {
     final _data = <String, dynamic>{};
     _data['id'] = id;
     _data['url'] = url;
+    _data['fileName'] = fileName;
     _data['idEHealthBookDetail'] = idEHealthBookDetail;
     _data['createdDate'] = createdDate;
     _data['modifiedDate'] = modifiedDate;

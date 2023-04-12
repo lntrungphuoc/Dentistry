@@ -62,17 +62,6 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                         child: Column(
                           children: [
                             ListTile(
-                              leading: Icon(Icons.calendar_month_outlined),
-                              visualDensity: VisualDensity(vertical: -3.h),
-                              title: Text(
-                                  DateFormat("yyyy-MM-dd")
-                                      .format(controller
-                                          .listHealthBookDetail[index]
-                                          .checkUpDate)
-                                      .toString(),
-                                  style: TextStyle(fontSize: 15.sp)),
-                            ),
-                            ListTile(
                               leading: Icon(Icons.edit_document),
                               visualDensity: VisualDensity(vertical: -3.h),
                               title: Text(
@@ -87,17 +76,6 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                               title: Text(
                                   controller
                                       .listHealthBookDetail[index].medicine
-                                      .toString(),
-                                  style: TextStyle(fontSize: 15.sp)),
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.calendar_month_outlined),
-                              visualDensity: VisualDensity(vertical: -3.h),
-                              title: Text(
-                                  DateFormat("yyyy-MM-dd")
-                                      .format(controller
-                                          .listHealthBookDetail[index]
-                                          .reExaminationDate)
                                       .toString(),
                                   style: TextStyle(fontSize: 15.sp)),
                             ),
@@ -151,6 +129,39 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                                 }),
                               ),
                             ),
+                            Theme(
+                              data: Theme.of(context)
+                                  .copyWith(dividerColor: Colors.transparent),
+                              child: ExpansionTile(
+                                title: Text("Tài liệu"),
+                                children: List.generate(
+                                    controller.listHealthBookDetail[index]
+                                        .attachments.length, (i) {
+                                  return Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 5.h, horizontal: 16.w),
+                                      child: TextButton.icon(
+                                        onPressed: () {
+                                          controller.downloadFile(controller
+                                              .listHealthBookDetail[index]
+                                              .attachments[i]
+                                              .url);
+                                        },
+                                        label: Text(
+                                            controller
+                                                .listHealthBookDetail[index]
+                                                .attachments[i]
+                                                .url,
+                                            style: TextStyle(fontSize: 15.sp)),
+                                        icon: Icon(Icons.download),
+                                      ),
+                                    ),
+                                  );
+                                }),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -163,140 +174,15 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
     );
   }
 
-  Column list_health_book_detail_card(HealthBookDetailController controller) {
-    return Column(
-        children:
-            List.generate(controller.listHealthBookDetail.length, (index) {
-      return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 3,
-                    blurRadius: 10,
-                    offset: Offset(0, 3))
-              ]),
-          child: Expanded(
-            child: Card(
-              elevation: 0,
-              child: Expanded(
-                child: Column(children: [
-                  Flexible(
-                    child: ListTile(
-                      leading: Icon(Icons.calendar_month_outlined),
-                      visualDensity: VisualDensity(vertical: -3.h),
-                      title: Text(
-                          DateFormat("yyyy-MM-dd")
-                              .format(controller
-                                  .listHealthBookDetail[index].checkUpDate)
-                              .toString(),
-                          style: TextStyle(fontSize: 15.sp)),
-                    ),
-                  ),
-                  Flexible(
-                    child: ListTile(
-                      leading: Icon(Icons.edit_document),
-                      visualDensity: VisualDensity(vertical: -3.h),
-                      title: Text(
-                          controller.listHealthBookDetail[index].diagnose
-                              .toString(),
-                          style: TextStyle(fontSize: 15.sp)),
-                    ),
-                  ),
-                  Flexible(
-                    child: ListTile(
-                      leading: Icon(Icons.medication_outlined),
-                      visualDensity: VisualDensity(vertical: -3.h),
-                      title: Text(
-                          controller.listHealthBookDetail[index].medicine
-                              .toString(),
-                          style: TextStyle(fontSize: 15.sp)),
-                    ),
-                  ),
-                  Flexible(
-                    child: ListTile(
-                      leading: Icon(Icons.calendar_month_outlined),
-                      visualDensity: VisualDensity(vertical: -3.h),
-                      title: Text(
-                          DateFormat("yyyy-MM-dd")
-                              .format(controller.listHealthBookDetail[index]
-                                  .reExaminationDate)
-                              .toString(),
-                          style: TextStyle(fontSize: 15.sp)),
-                    ),
-                  ),
-                  Theme(
-                    data: Theme.of(context)
-                        .copyWith(dividerColor: Colors.transparent),
-                    child: ExpansionTile(
-                      title: Text("Dịch vụ"),
-                      children: List.generate(
-                          controller.listHealthBookDetail[index]
-                              .eHealthBookDetailServices.length, (i) {
-                        return Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5.h, horizontal: 16.w),
-                            child: Text(
-                                controller.listHealthBookDetail[index]
-                                    .eHealthBookDetailServices[i].service.name,
-                                style: TextStyle(fontSize: 15.sp)),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
-                  Theme(
-                    data: Theme.of(context)
-                        .copyWith(dividerColor: Colors.transparent),
-                    child: ExpansionTile(
-                      title: Text("Bác sĩ"),
-                      children: List.generate(
-                          controller.listHealthBookDetail[index]
-                              .eHealthBookDetailDoctor.length, (i) {
-                        return Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5.h, horizontal: 16.w),
-                            child: Text(
-                                controller.listHealthBookDetail[index]
-                                    .eHealthBookDetailDoctor[i].doctor.name,
-                                style: TextStyle(fontSize: 15.sp)),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
-                ]),
-              ),
-            ),
-          ),
-        ),
-      );
-    }));
-  }
-
   DataTable health_book_detail_table(HealthBookDetailController controller) {
     return DataTable(
         dataRowHeight: rowCount(controller) * 20.h + 30.h,
         columns: const [
           DataColumn(label: Text("STT")),
           DataColumn(
-            label: Text('Ngày khám'),
-          ),
-          DataColumn(
             label: Text('Chẩn đoán'),
           ),
           DataColumn(label: Text('Thuốc')),
-          DataColumn(
-            label: Text('Ngày tái khám'),
-          ),
           DataColumn(
             label: Text('Bác sĩ'),
           ),
@@ -311,12 +197,6 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                 child: Text((index + 1).toString()))),
             DataCell(SizedBox(
               // height: rowCount * 0,
-              child: Text(DateFormat("yyyy-MM-dd")
-                  .format(controller.listHealthBookDetail[index].checkUpDate)
-                  .toString()),
-            )),
-            DataCell(SizedBox(
-              // height: rowCount * 0,
               child: Text(
                   controller.listHealthBookDetail[index].diagnose.toString()),
             )),
@@ -324,13 +204,6 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
               // height: rowCount * 0,
               child: Text(
                   controller.listHealthBookDetail[index].medicine.toString()),
-            )),
-            DataCell(SizedBox(
-              // height: rowCount * 0,
-              child: Text(DateFormat("yyyy-MM-dd")
-                  .format(
-                      controller.listHealthBookDetail[index].reExaminationDate)
-                  .toString()),
             )),
             DataCell(SizedBox(
               // height: rowCount * 0,
