@@ -9,6 +9,7 @@ class AppointmentSchedule {
     required this.date,
     required this.time,
     required this.content,
+    required this.isConfirm,
     this.createdDate,
     this.modifiedDate,
     this.createdBy,
@@ -22,6 +23,7 @@ class AppointmentSchedule {
   late final DateTime date;
   late final DateTime time;
   late final String content;
+  late final bool isConfirm;
   late final DateTime? createdDate;
   late final DateTime? modifiedDate;
   late final int? createdBy;
@@ -36,6 +38,7 @@ class AppointmentSchedule {
     date = json['date'];
     time = json['time'];
     content = json['content'];
+    isConfirm = json['isConfirm'];
     createdDate = DateTime.parse(json['createdDate']);
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
     createdBy = json['createdBy'];
@@ -54,10 +57,11 @@ class AppointmentSchedule {
     List<String> timeArray = time.toString().split(" ");
     _data['time'] = timeArray[0] + "T" + timeArray[1];
     _data['content'] = content;
-    _data['createdDate'] = createdDate?.toString();
-    _data['modifiedDate'] = modifiedDate?.toString();
-    _data['createdBy'] = createdBy;
-    _data['modifiedBy'] = modifiedBy;
+    _data['isConfirm'] = isConfirm;
+    // _data['createdDate'] = createdDate?.toString();
+    // _data['modifiedDate'] = modifiedDate?.toString();
+    // _data['createdBy'] = createdBy;
+    // _data['modifiedBy'] = modifiedBy;
     return _data;
   }
 }

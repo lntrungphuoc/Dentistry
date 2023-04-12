@@ -105,7 +105,8 @@ class MakeAppointmentController extends GetxController {
           date: DateTime.parse(dateController.text),
           time: DateFormat("yyyy-MM-dd hh:mm:ss")
               .parse(dateController.text + " " + timeController.text + ":00"),
-          content: contentController.text);
+          content: contentController.text,
+          isConfirm: false);
       var response =
           await _makeAppointmentRepository.create(appointmentRequest);
       if (response == true) {
