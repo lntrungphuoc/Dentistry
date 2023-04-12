@@ -141,12 +141,12 @@ class _PriceListViewState extends State<PriceListView> {
                                       controller.foundPriceLists[index].title
                                           .toString(),
                                       style: TextStyles.title.bold),
-                                  subtitle: Text(
-                                    controller.foundPriceLists[index].content
-                                        .toString(),
-                                    style: TextStyle(fontSize: 14.sp),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                                  // subtitle: Text(
+                                  //   controller.foundPriceLists[index].content
+                                  //       .toString(),
+                                  //   style: TextStyle(fontSize: 14.sp),
+                                  //   overflow: TextOverflow.ellipsis,
+                                  // ),
                                   trailing: Icon(
                                     Icons.keyboard_arrow_right,
                                     size: 30.sp,

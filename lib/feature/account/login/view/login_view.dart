@@ -85,7 +85,7 @@ class _LoginViewState extends State<LoginView> {
                   height: 15.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Container(
                     height: 55.h,
                     padding: EdgeInsets.only(top: 3.h),
@@ -123,7 +123,7 @@ class _LoginViewState extends State<LoginView> {
                   height: 25.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: TextButton(
                       onPressed: () {
                         controller.login();
@@ -174,7 +174,7 @@ class _LoginViewState extends State<LoginView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Container(
                     height: 55.h,
                     padding: EdgeInsets.only(top: 3.h),
@@ -201,7 +201,7 @@ class _LoginViewState extends State<LoginView> {
                   height: 15.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Container(
                     height: 55.h,
                     padding: EdgeInsets.only(top: 3.h),
@@ -291,10 +291,8 @@ class _LoginViewState extends State<LoginView> {
               width: double.infinity,
               child: Column(
                 children: [
-                  Image.asset("assets/image/trans_logo.png", height: 150, width: 150,),
-                  // SizedBox(
-                  //   height: 20.h,
-                  // ),
+                  Image.asset("assets/image/trans_logo.png", width: 150.w,),
+                  SizedBox(height: 15.h,),
                   Text(
                     "Welcome Back!",
                     style: TextStyle(
@@ -314,13 +312,13 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       Expanded(
                           child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: Divider(),
                       )),
                       Text('Hoặc'),
                       Expanded(
                           child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: Divider(),
                       )),
                     ],
@@ -329,7 +327,7 @@ class _LoginViewState extends State<LoginView> {
                     height: 25.h,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: OutlinedButton.icon(
                         style: OutlinedButton.styleFrom(
                             fixedSize:
@@ -351,7 +349,7 @@ class _LoginViewState extends State<LoginView> {
                     height: 10.h,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: OutlinedButton.icon(
                         style: OutlinedButton.styleFrom(
                             fixedSize:

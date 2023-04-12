@@ -4,6 +4,7 @@ import 'package:app_dentristy_mobile/theme/light_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -45,9 +46,9 @@ class PriceListDetailView extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                Text(
-                  priceList.content,
-                  style: TextStyle(fontSize: 14.sp),
+                Html(
+                  data: priceList.content,
+                  defaultTextStyle: TextStyle(fontSize: 14.sp),
                 ),
               ],
             ),

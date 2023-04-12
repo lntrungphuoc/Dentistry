@@ -201,7 +201,7 @@ class _HomeViewState extends State<HomeView>
                     ),
                     Padding(
                       padding:
-                          EdgeInsets.only(top: 37.h, left: 20.w, right: 20.w),
+                          EdgeInsets.only(top: 37.h, left: 16.w, right: 16.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
