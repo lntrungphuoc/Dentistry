@@ -62,6 +62,49 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                         child: Column(
                           children: [
                             ListTile(
+                              leading: Icon(Icons.view_list),
+                              visualDensity: VisualDensity(vertical: -3.h),
+                              title: Text(
+                                generateServiceString(controller, index),
+                                style: TextStyle(
+                                    fontSize: 16.sp,),
+                              ),
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.person),
+                              visualDensity: VisualDensity(vertical: -3.h),
+                              title: Text(
+                                generateDoctorString(controller, index),
+                                style: TextStyle(
+                                    fontSize: 16.sp,),
+                              ),
+                            ),
+                            // Theme(
+                            //   data: Theme.of(context)
+                            //       .copyWith(dividerColor: Colors.transparent),
+                            //   child: ExpansionTile(
+                            //     title: Text("Dịch vụ"),
+                            //     children: List.generate(
+                            //         controller.listHealthBookDetail[index]
+                            //             .eHealthBookDetailServices.length, (i) {
+                            //       return Align(
+                            //         alignment: Alignment.centerLeft,
+                            //         child: Padding(
+                            //           padding: EdgeInsets.symmetric(
+                            //               vertical: 5.h, horizontal: 16.w),
+                            //           child: Text(
+                            //               controller
+                            //                   .listHealthBookDetail[index]
+                            //                   .eHealthBookDetailServices[i]
+                            //                   .service
+                            //                   .name,
+                            //               style: TextStyle(fontSize: 15.sp)),
+                            //         ),
+                            //       );
+                            //     }),
+                            //   ),
+                            // ),
+                            ListTile(
                               leading: Icon(Icons.edit_document),
                               visualDensity: VisualDensity(vertical: -3.h),
                               title: Text(
@@ -78,56 +121,6 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                                       .listHealthBookDetail[index].medicine
                                       .toString(),
                                   style: TextStyle(fontSize: 15.sp)),
-                            ),
-                            Theme(
-                              data: Theme.of(context)
-                                  .copyWith(dividerColor: Colors.transparent),
-                              child: ExpansionTile(
-                                title: Text("Dịch vụ"),
-                                children: List.generate(
-                                    controller.listHealthBookDetail[index]
-                                        .eHealthBookDetailServices.length, (i) {
-                                  return Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 5.h, horizontal: 16.w),
-                                      child: Text(
-                                          controller
-                                              .listHealthBookDetail[index]
-                                              .eHealthBookDetailServices[i]
-                                              .service
-                                              .name,
-                                          style: TextStyle(fontSize: 15.sp)),
-                                    ),
-                                  );
-                                }),
-                              ),
-                            ),
-                            Theme(
-                              data: Theme.of(context)
-                                  .copyWith(dividerColor: Colors.transparent),
-                              child: ExpansionTile(
-                                title: Text("Bác sĩ"),
-                                children: List.generate(
-                                    controller.listHealthBookDetail[index]
-                                        .eHealthBookDetailDoctor.length, (i) {
-                                  return Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 5.h, horizontal: 16.w),
-                                      child: Text(
-                                          controller
-                                              .listHealthBookDetail[index]
-                                              .eHealthBookDetailDoctor[i]
-                                              .doctor
-                                              .name,
-                                          style: TextStyle(fontSize: 15.sp)),
-                                    ),
-                                  );
-                                }),
-                              ),
                             ),
                             Theme(
                               data: Theme.of(context)
@@ -172,6 +165,40 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
       }),
       bottomNavigationBar: getFooter(),
     );
+  }
+
+  String generateServiceString(
+      HealthBookDetailController controller, int index) {
+    var res = "";
+    int length =
+        controller.listHealthBookDetail[index].eHealthBookDetailServices.length;
+    for (int i = 0; i < length - 1; i++) {
+      res = res +
+          controller.listHealthBookDetail[index].eHealthBookDetailServices[i]
+              .service.name +
+          ", ";
+    }
+    res = res +
+        controller.listHealthBookDetail[index]
+            .eHealthBookDetailServices[length - 1].service.name;
+    return res;
+  }
+
+  String generateDoctorString(
+      HealthBookDetailController controller, int index) {
+    var res = "";
+    int length =
+        controller.listHealthBookDetail[index].eHealthBookDetailDoctor.length;
+    for (int i = 0; i < length - 1; i++) {
+      res = res +
+          controller.listHealthBookDetail[index].eHealthBookDetailDoctor[i]
+              .doctor.name +
+          ", ";
+    }
+    res = res +
+        controller.listHealthBookDetail[index]
+            .eHealthBookDetailDoctor[length - 1].doctor.name;
+    return res;
   }
 
   DataTable health_book_detail_table(HealthBookDetailController controller) {
