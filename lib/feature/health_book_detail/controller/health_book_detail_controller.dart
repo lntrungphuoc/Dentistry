@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
@@ -6,6 +7,7 @@ import 'package:app_dentristy_mobile/model/e_healthbook_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../core/repository/implementations/health_book_detail_repository.dart';
 
@@ -15,6 +17,7 @@ class HealthBookDetailController extends GetxController {
   HealthBookDetailController() {
     _healthBookDetailRepository = Get.find<HealthBookDetailRepository>();
     getByIdHealthBook();
+    initDownloader();
   }
 
   static void downloadCallback(String id, DownloadTaskStatus status, int progress) {
@@ -54,20 +57,22 @@ class HealthBookDetailController extends GetxController {
     isLoading.toggle();
   }
 
-  downloadFile(url) async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await FlutterDownloader.initialize();
-
+  initDownloader() async {
     IsolateNameServer.registerPortWithName(_port.sendPort, 'downloader_send_port');
-    _port.listen((dynamic data) {
-      String id = data[0];
-      DownloadTaskStatus status = data[1];
-      int progress = data[2];
-    });
+  _port.listen((dynamic data) {
+    String id = data[0];
+    DownloadTaskStatus status = data[1];
+    int progress = data[2];
+  });
 
+  FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+  
+
+  downloadFile(url) async {
     print(url);
-
-    FlutterDownloader.registerCallback(downloadCallback);
+    final baseStorage = await getExternalStorageDirectory();
     final taskId = await FlutterDownloader.enqueue(
       url: url,
       savedDir: '/storage/emulated/0/Download',

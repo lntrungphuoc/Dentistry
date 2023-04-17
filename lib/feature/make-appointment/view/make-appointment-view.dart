@@ -66,7 +66,7 @@ class MakeAppointmentView extends StatelessWidget {
                           child: DropdownButtonFormField(
                             decoration: const InputDecoration(
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.all(0),
+                                contentPadding: EdgeInsets.only(left: 10),
                                 labelText: 'Chọn phòng khám',
                                 prefixIcon: Icon(Icons.home)),
                             value: controller.listClinic[0],

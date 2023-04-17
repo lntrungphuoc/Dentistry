@@ -67,7 +67,7 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                               title: Text(
                                 generateServiceString(controller, index),
                                 style: TextStyle(
-                                    fontSize: 16.sp,),
+                                    fontSize: 15.sp, color: Colors.blue),
                               ),
                             ),
                             ListTile(
@@ -76,34 +76,10 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                               title: Text(
                                 generateDoctorString(controller, index),
                                 style: TextStyle(
-                                    fontSize: 16.sp,),
+                                  fontSize: 15.sp,
+                                ),
                               ),
                             ),
-                            // Theme(
-                            //   data: Theme.of(context)
-                            //       .copyWith(dividerColor: Colors.transparent),
-                            //   child: ExpansionTile(
-                            //     title: Text("Dịch vụ"),
-                            //     children: List.generate(
-                            //         controller.listHealthBookDetail[index]
-                            //             .eHealthBookDetailServices.length, (i) {
-                            //       return Align(
-                            //         alignment: Alignment.centerLeft,
-                            //         child: Padding(
-                            //           padding: EdgeInsets.symmetric(
-                            //               vertical: 5.h, horizontal: 16.w),
-                            //           child: Text(
-                            //               controller
-                            //                   .listHealthBookDetail[index]
-                            //                   .eHealthBookDetailServices[i]
-                            //                   .service
-                            //                   .name,
-                            //               style: TextStyle(fontSize: 15.sp)),
-                            //         ),
-                            //       );
-                            //     }),
-                            //   ),
-                            // ),
                             ListTile(
                               leading: Icon(Icons.edit_document),
                               visualDensity: VisualDensity(vertical: -3.h),
@@ -138,15 +114,14 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                                       child: TextButton.icon(
                                         onPressed: () {
                                           controller.downloadFile(controller
-                                              .listHealthBookDetail[index]
-                                              .attachments[i]
-                                              .url);
+                                                .listHealthBookDetail[index]
+                                                .attachments[i]
+                                                .url);
                                         },
                                         label: Text(
                                             controller
                                                 .listHealthBookDetail[index]
-                                                .attachments[i]
-                                                .url,
+                                                .attachments[i].fileName,
                                             style: TextStyle(fontSize: 15.sp)),
                                         icon: Icon(Icons.download),
                                       ),
@@ -165,6 +140,11 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
       }),
       bottomNavigationBar: getFooter(),
     );
+  }
+
+  String convertURL(String url) {
+    List<String> s = url.split(":");
+    return s[0] + "://localhost:" + s[2];
   }
 
   String generateServiceString(

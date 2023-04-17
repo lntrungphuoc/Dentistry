@@ -21,12 +21,20 @@ import 'package:app_dentristy_mobile/feature/splash/view/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
 import 'feature/health_book/view/health_book_view.dart';
 import 'feature/home/binding/home_binding.dart';
 import 'feature/home/view/home_view.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Plugin must be initialized before using
+  await FlutterDownloader.initialize(
+    debug: true, // optional: set to false to disable printing logs to console (default: true)
+    ignoreSsl: true // option: set to false to disable working with http links (default: false)
+  );
   HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }

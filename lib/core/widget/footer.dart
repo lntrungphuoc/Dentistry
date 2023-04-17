@@ -62,20 +62,25 @@ getFooter() {
                     color: state.activeTab == index ? Colors.red : Colors.black,
                   ),
                   onPressed: () async {
-                    state.changeTab(index.obs);
                     if (index == 3) {
-                      if (await SecureStorage.getLoggedInCustomer() != null || await SecureStorage.getLoggedInUser() != null) {
+                      state.changeTab(index.obs);
+                      if (await SecureStorage.getLoggedInCustomer() != null ||
+                          await SecureStorage.getLoggedInUser() != null) {
                         Get.toNamed("/profile");
                       } else {
                         Get.toNamed(tabItems[index]['url'].toString());
                       }
                     } else if (index == 2) {
-                      if (await SecureStorage.getLoggedInCustomer() != null || await SecureStorage.getLoggedInUser() != null) {
+                      if (await SecureStorage.getLoggedInCustomer() != null ||
+                          await SecureStorage.getLoggedInUser() != null) {
+                        state.changeTab(index.obs);
                         Get.toNamed("/health_book");
                       } else {
+                        state.changeTab(3.obs);
                         Get.toNamed("/login");
                       }
                     } else {
+                      state.changeTab(index.obs);
                       Get.toNamed(tabItems[index]['url'].toString());
                     }
                   },
