@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:app_dentristy_mobile/feature/health_book_detail/controller/health_book_detail_controller.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../core/widget/footer.dart';
 
@@ -65,7 +69,7 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                               leading: Icon(Icons.view_list),
                               visualDensity: VisualDensity(vertical: -3.h),
                               title: Text(
-                                generateServiceString(controller, index),
+                                controller.generateServiceString(index),
                                 style: TextStyle(
                                     fontSize: 15.sp, color: Colors.blue),
                               ),
@@ -74,7 +78,7 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                               leading: Icon(Icons.person),
                               visualDensity: VisualDensity(vertical: -3.h),
                               title: Text(
-                                generateDoctorString(controller, index),
+                                controller.generateDoctorString(index),
                                 style: TextStyle(
                                   fontSize: 15.sp,
                                 ),
@@ -113,15 +117,25 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                                           vertical: 5.h, horizontal: 16.w),
                                       child: TextButton.icon(
                                         onPressed: () {
-                                          controller.downloadFile(controller
-                                                .listHealthBookDetail[index]
-                                                .attachments[i]
-                                                .url);
+                                          controller.openFile(
+                                              url: controller
+                                                  .listHealthBookDetail[index]
+                                                  .attachments[i]
+                                                  .url,
+                                              fileName: controller
+                                                  .listHealthBookDetail[index]
+                                                  .attachments[i]
+                                                  .fileName);
+                                          // controller.downloadFile(controller
+                                          //       .listHealthBookDetail[index]
+                                          //       .attachments[i]
+                                          //       .url);
                                         },
                                         label: Text(
                                             controller
                                                 .listHealthBookDetail[index]
-                                                .attachments[i].fileName,
+                                                .attachments[i]
+                                                .fileName,
                                             style: TextStyle(fontSize: 15.sp)),
                                         icon: Icon(Icons.download),
                                       ),
@@ -142,123 +156,5 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
     );
   }
 
-  String convertURL(String url) {
-    List<String> s = url.split(":");
-    return s[0] + "://localhost:" + s[2];
-  }
-
-  String generateServiceString(
-      HealthBookDetailController controller, int index) {
-    var res = "";
-    int length =
-        controller.listHealthBookDetail[index].eHealthBookDetailServices.length;
-    for (int i = 0; i < length - 1; i++) {
-      res = res +
-          controller.listHealthBookDetail[index].eHealthBookDetailServices[i]
-              .service.name +
-          ", ";
-    }
-    res = res +
-        controller.listHealthBookDetail[index]
-            .eHealthBookDetailServices[length - 1].service.name;
-    return res;
-  }
-
-  String generateDoctorString(
-      HealthBookDetailController controller, int index) {
-    var res = "";
-    int length =
-        controller.listHealthBookDetail[index].eHealthBookDetailDoctor.length;
-    for (int i = 0; i < length - 1; i++) {
-      res = res +
-          controller.listHealthBookDetail[index].eHealthBookDetailDoctor[i]
-              .doctor.name +
-          ", ";
-    }
-    res = res +
-        controller.listHealthBookDetail[index]
-            .eHealthBookDetailDoctor[length - 1].doctor.name;
-    return res;
-  }
-
-  DataTable health_book_detail_table(HealthBookDetailController controller) {
-    return DataTable(
-        dataRowHeight: rowCount(controller) * 20.h + 30.h,
-        columns: const [
-          DataColumn(label: Text("STT")),
-          DataColumn(
-            label: Text('Chẩn đoán'),
-          ),
-          DataColumn(label: Text('Thuốc')),
-          DataColumn(
-            label: Text('Bác sĩ'),
-          ),
-          DataColumn(
-            label: Text('Dịch vụ'),
-          ),
-        ],
-        rows: List.generate(controller.listHealthBookDetail.length, (index) {
-          return DataRow(cells: [
-            DataCell(SizedBox(
-                // height: rowCount * 0,
-                child: Text((index + 1).toString()))),
-            DataCell(SizedBox(
-              // height: rowCount * 0,
-              child: Text(
-                  controller.listHealthBookDetail[index].diagnose.toString()),
-            )),
-            DataCell(SizedBox(
-              // height: rowCount * 0,
-              child: Text(
-                  controller.listHealthBookDetail[index].medicine.toString()),
-            )),
-            DataCell(SizedBox(
-              // height: rowCount * 0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
-                children: List.generate(
-                    controller.listHealthBookDetail[index]
-                        .eHealthBookDetailDoctor.length, (i) {
-                  return Padding(
-                    padding: EdgeInsets.all(0),
-                    child: Text(controller.listHealthBookDetail[index]
-                        .eHealthBookDetailDoctor[i].doctor.name),
-                  );
-                }),
-              ),
-            )),
-            DataCell(Container(
-              // height: rowCount * 0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
-                children: List.generate(
-                    controller.listHealthBookDetail[index]
-                        .eHealthBookDetailServices.length, (i) {
-                  return Padding(
-                    padding: EdgeInsets.all(0),
-                    child: Text(controller.listHealthBookDetail[index]
-                        .eHealthBookDetailServices[i].service.name),
-                  );
-                }),
-              ),
-            )),
-          ]);
-        }));
-  }
-
-  int rowCount(controller) {
-    int count = 0;
-    for (int i = 0; i < controller.listHealthBookDetail.length; i++) {
-      int max = controller
-                  .listHealthBookDetail[i].eHealthBookDetailServices.length >
-              controller.listHealthBookDetail[i].eHealthBookDetailDoctor.length
-          ? controller.listHealthBookDetail[i].eHealthBookDetailServices.length
-          : controller.listHealthBookDetail[i].eHealthBookDetailDoctor.length;
-      count = count > max ? count : max;
-    }
-    print(count);
-    return count;
-  }
+  
 }

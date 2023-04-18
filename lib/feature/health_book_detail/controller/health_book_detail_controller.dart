@@ -4,9 +4,10 @@ import 'dart:ui';
 
 import 'package:app_dentristy_mobile/core/repository/interfaces/i_health_book_detail_repository.dart';
 import 'package:app_dentristy_mobile/model/e_healthbook_detail.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
+import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../core/repository/implementations/health_book_detail_repository.dart';
@@ -17,16 +18,7 @@ class HealthBookDetailController extends GetxController {
   HealthBookDetailController() {
     _healthBookDetailRepository = Get.find<HealthBookDetailRepository>();
     getByIdHealthBook();
-    initDownloader();
   }
-
-  static void downloadCallback(String id, DownloadTaskStatus status, int progress) {
-    final SendPort send = IsolateNameServer.lookupPortByName('downloader_send_port')!;
-    send.send([id, status, progress]);
-  }
-
-  final ReceivePort _port = ReceivePort();
-
 
   late RxList<EHealthBookDetail> listHealthBookDetail;
 
@@ -57,27 +49,68 @@ class HealthBookDetailController extends GetxController {
     isLoading.toggle();
   }
 
-  initDownloader() async {
-    IsolateNameServer.registerPortWithName(_port.sendPort, 'downloader_send_port');
-  _port.listen((dynamic data) {
-    String id = data[0];
-    DownloadTaskStatus status = data[1];
-    int progress = data[2];
-  });
+  openFile({required String url, String? fileName}) async {
+    final file = await downloadFile(url, fileName!);
+    if (file == null) return;
 
-  FlutterDownloader.registerCallback(downloadCallback);
+    print('Path: ${file.path}');
+    // WebViewWidget(controller: webPageController);
+    OpenFilex.open(file.path);
   }
 
-  
+  Future<File?> downloadFile(String url, String fileName) async {
+    final appStorage = await getApplicationDocumentsDirectory();
 
-  downloadFile(url) async {
-    print(url);
-    final baseStorage = await getExternalStorageDirectory();
-    final taskId = await FlutterDownloader.enqueue(
-      url: url,
-      savedDir: '/storage/emulated/0/Download',
-      showNotification: true,
-      openFileFromNotification: true,
-    );
+    final file = File('/storage/emulated/0/Download/$fileName');
+    // final file = File('${appStorage.path}/$fileName');
+
+    try {
+      final response = await Dio().get(
+        url,
+        options: Options(
+          responseType: ResponseType.bytes,
+          followRedirects: false,
+          // receiveTimeout: Duration(seconds: 0),
+        ),
+      );
+
+      final raf = file.openSync(mode: FileMode.write);
+      raf.writeFromSync(response.data);
+      await raf.close();
+
+      return file;
+    } on Exception catch (e) {
+      return null;
+    }
+  }
+
+  String generateServiceString(int index) {
+    var res = "";
+    int length = listHealthBookDetail[index].eHealthBookDetailServices.length;
+    for (int i = 0; i < length - 1; i++) {
+      res =
+          "$res${listHealthBookDetail[index].eHealthBookDetailServices[i].service.name}, ";
+    }
+    res = res +
+        listHealthBookDetail[index]
+            .eHealthBookDetailServices[length - 1]
+            .service
+            .name;
+    return res;
+  }
+
+  String generateDoctorString(int index) {
+    var res = "";
+    int length = listHealthBookDetail[index].eHealthBookDetailDoctor.length;
+    for (int i = 0; i < length - 1; i++) {
+      res =
+          "$res${listHealthBookDetail[index].eHealthBookDetailDoctor[i].doctor.name}, ";
+    }
+    res = res +
+        listHealthBookDetail[index]
+            .eHealthBookDetailDoctor[length - 1]
+            .doctor
+            .name;
+    return res;
   }
 }
