@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "990724290743",
+    "project_id": "dentistry-8e7c0",
+    "storage_bucket": "dentistry-8e7c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990724290743:android:89edbb79b3bec3d7ecf532",
+        "android_client_info": {
+          "package_name": "com.example.app_dentristy_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "990724290743-6ljk5pb9vc5u481r8st2adefnq9u61iv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv7tP-nuA9RyguzeyczOXbB44S8uN7bt0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "990724290743-6ljk5pb9vc5u481r8st2adefnq9u61iv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

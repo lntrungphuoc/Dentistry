@@ -7,6 +7,7 @@ import 'package:app_dentristy_mobile/model/e_healthbook_detail.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -50,12 +51,20 @@ class HealthBookDetailController extends GetxController {
   }
 
   openFile({required String url, String? fileName}) async {
-    final file = await downloadFile(url, fileName!);
+    final file = await downloadFile(url, fileName!).then((value) async {
+      print(value!.path);
+      return await OpenFile.open(value!.path);
+    });
     if (file == null) return;
 
-    print('Path: ${file.path}');
-    // WebViewWidget(controller: webPageController);
-    OpenFilex.open(file.path);
+    // print('Path: ${file.path}');
+    // // OpenFilex.open(file.path);
+   
+    // try {
+    //   await OpenFile.open(file.path);
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 
   Future<File?> downloadFile(String url, String fileName) async {

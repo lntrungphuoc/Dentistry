@@ -116,8 +116,8 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                                       padding: EdgeInsets.symmetric(
                                           vertical: 5.h, horizontal: 16.w),
                                       child: TextButton.icon(
-                                        onPressed: () {
-                                          controller.openFile(
+                                        onPressed: () async {
+                                         await controller.openFile(
                                               url: controller
                                                   .listHealthBookDetail[index]
                                                   .attachments[i]
