@@ -19,6 +19,7 @@ import 'package:app_dentristy_mobile/feature/service_list/view/service_detail_vi
 import 'package:app_dentristy_mobile/feature/service_list/view/service_list_view.dart';
 import 'package:app_dentristy_mobile/feature/splash/view/splash_view.dart';
 import 'package:app_dentristy_mobile/feature/test_firebase/view/test_remote_firebase.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,8 @@ import 'feature/home/binding/home_binding.dart';
 import 'feature/home/view/home_view.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }

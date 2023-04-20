@@ -21,19 +21,33 @@ class _TestRemoteFirebaseState extends State<TestRemoteFirebase> {
 
   Future<void> _initConfig() async {
     await _remoteConfig.setConfigSettings(RemoteConfigSettings(
-        fetchTimeout: Duration(seconds: 10),
-        minimumFetchInterval: Duration(hours: 1)));
+        fetchTimeout: Duration(seconds: 0),
+        minimumFetchInterval: Duration(hours: 0)));
     _fetchConfig();
   }
 
   void _fetchConfig() async {
     await _remoteConfig.fetchAndActivate();
+    // var remoteConfigTemplate = await _remoteConfig.getAll();
+    // print(remoteConfigTemplate);
   }
 
   @override
   void initState() {
     _initConfig();
     super.initState();
+  }
+
+  String getGreetingColor() {
+    return _remoteConfig.getString('background_color').isNotEmpty
+        ? _remoteConfig.getString('background_color')
+        : defaultGreetingColor;
+  }
+
+  String getGreetingText() {
+    return _remoteConfig.getString('welcome_message').isNotEmpty
+        ? _remoteConfig.getString('welcome_message')
+        : defaultGreetingText;
   }
 
   @override
@@ -45,15 +59,8 @@ class _TestRemoteFirebaseState extends State<TestRemoteFirebase> {
       //         : defaultGreetingColor],
       body: Center(
         child: Container(
-          color: _availableGreetingColor[
-              _remoteConfig.getString('background_color').isNotEmpty
-                  ? _remoteConfig.getString('background_color')
-                  : defaultGreetingColor],
-          child: Text(
-            _remoteConfig.getString('welcome_message').isNotEmpty
-                ? _remoteConfig.getString('welcome_message')
-                : defaultGreetingText,
-          ),
+          color: _availableGreetingColor[getGreetingColor()],
+          child: Text(getGreetingText()),
         ),
       ),
     );

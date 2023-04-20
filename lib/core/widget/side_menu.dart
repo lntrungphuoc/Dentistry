@@ -74,7 +74,12 @@ class _SideMenuState extends State<SideMenu> {
                         });
                       },
                       isActive: selectedMenu == menu,
-                    ))
+                    )),
+                TextButton(
+                    onPressed: () {
+                      Get.toNamed('/test_remote_firebase');
+                    },
+                    child: Text('Remote firebase')),
               ],
             ),
           ],
