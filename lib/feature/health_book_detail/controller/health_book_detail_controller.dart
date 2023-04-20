@@ -52,7 +52,7 @@ class HealthBookDetailController extends GetxController {
 
   openFile({required String url, String? fileName}) async {
     final file = await downloadFile(url, fileName!).then((value) async {
-      print(value!.path);
+      // print(value!.path);
       return await OpenFile.open(value!.path);
     });
     if (file == null) return;
