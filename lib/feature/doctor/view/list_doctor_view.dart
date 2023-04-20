@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_dentristy_mobile/feature/doctor/view/doctor_detail_view.dart';
 import 'package:app_dentristy_mobile/model/doctor.dart';
 import 'package:app_dentristy_mobile/theme/extention.dart';
 import 'package:flutter/material.dart';
@@ -138,8 +139,8 @@ class _ListDoctorViewState extends State<ListDoctorView> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15.r),
                                   ),
-                                  child: Image.asset(
-                                    'assets/image/profile_2.jpg',
+                                  child: Image.network(
+                                    controller.foundDoctors[index].avatarUrl,
                                     height: 90.h,
                                     width: 70.w,
                                     fit: BoxFit.contain,
@@ -158,7 +159,8 @@ class _ListDoctorViewState extends State<ListDoctorView> {
                               ),
                               trailing: IconButton(
                                 onPressed: () {
-                                  Get.toNamed('/doctor_detail');
+                                  Get.to(DoctorDetailView(
+                                      doctor: controller.foundDoctors[index]));
                                 },
                                 icon: Icon(
                                   Icons.keyboard_arrow_right,

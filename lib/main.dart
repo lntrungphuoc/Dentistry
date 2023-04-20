@@ -73,8 +73,8 @@ class MyApp extends StatelessWidget {
                   name: '/price_list',
                   page: () => const PriceListView(),
                   binding: PriceListBinding()),
-              GetPage(
-                  name: '/doctor_detail', page: () => const DoctorDetailView()),
+              // GetPage(
+              //     name: '/doctor_detail', page: () => const DoctorDetailView()),
               GetPage(
                   name: '/make_appointment',
                   page: () => MakeAppointmentView(),

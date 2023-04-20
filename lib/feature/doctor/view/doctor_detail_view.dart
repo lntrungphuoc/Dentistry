@@ -1,3 +1,4 @@
+import 'package:app_dentristy_mobile/model/doctor.dart';
 import 'package:app_dentristy_mobile/theme/extention.dart';
 import 'package:app_dentristy_mobile/theme/light_color.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,9 @@ import '../../../theme/text_styles.dart';
 import '../../../theme/theme.dart';
 
 class DoctorDetailView extends StatelessWidget {
-  const DoctorDetailView({super.key});
+  const DoctorDetailView({super.key, required this.doctor});
+
+  final Doctor doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +29,9 @@ class DoctorDetailView extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 2.1,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/image/doctor_detail.jpg'),
-                      fit: BoxFit.cover),
+                      image: NetworkImage(doctor.avatarUrl), fit: BoxFit.cover),
                 ),
                 child: Container(
                   decoration: BoxDecoration(
@@ -129,23 +131,20 @@ class DoctorDetailView extends StatelessWidget {
                             height: 5.h,
                           ),
                           Text(
-                            'Nguyen Van ABC',
+                            this.doctor.name,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 24.h),
                           )
                         ],
                       ),
+                      SizedBox(height: 5.h,),
                       const Divider(
                         thickness: .3,
                         color: LightColor.grey,
                       ),
-                      Row(
-                        children: [
-                          Text("Thông tin", style: titleStyle).vP16,
-                        ],
-                      ),
-                      const Text(
-                        'Quê em là một ngôi làng nhỏ nằm dưới chân núi. Đứng ở lưng núi là có thể quan sát toàn bộ ngôi làng. Nhìn khắp làng, đâu cũng là màu xanh tươi tràn ngập sức sống. Đó là màu xanh của ruộng lúa đương thì ngon gái thơm nồng hương sữa lúa non.',
+                      Text("Thông tin", style: titleStyle).vP16,
+                      Text(
+                        this.doctor.information,
                         style: TextStyle(fontSize: 16),
                       ),
                     ],
@@ -192,7 +191,7 @@ class DoctorDetailView extends StatelessWidget {
               () {},
               borderRadius: BorderRadius.circular(10.r),
             ),
-             SizedBox(
+            SizedBox(
               width: 15.w,
             ),
             TextButton(
