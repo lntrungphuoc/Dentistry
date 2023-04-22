@@ -18,6 +18,7 @@ import 'package:app_dentristy_mobile/feature/service_list/binding/service_bindin
 import 'package:app_dentristy_mobile/feature/service_list/view/service_detail_view.dart';
 import 'package:app_dentristy_mobile/feature/service_list/view/service_list_view.dart';
 import 'package:app_dentristy_mobile/feature/splash/view/splash_view.dart';
+import 'package:app_dentristy_mobile/feature/test_firebase/view/test_cloud_messaging.dart';
 import 'package:app_dentristy_mobile/feature/test_firebase/view/test_remote_firebase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -95,8 +96,10 @@ class MyApp extends StatelessWidget {
               GetPage(name: '/profile', page: () => const ProfileView()),
               GetPage(
                   name: '/test_remote_firebase',
-                  page: () => const TestRemoteFirebase())
-              // GetPage(name: '/service_detail', page: () => ServiceDetailView())
+                  page: () => const TestRemoteFirebase()),
+              GetPage(
+                  name: '/test_cloud_messaging',
+                  page: () => TestCloudMessaging())
             ],
             initialRoute: '/splash',
           );

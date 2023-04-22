@@ -80,6 +80,11 @@ class _SideMenuState extends State<SideMenu> {
                       Get.toNamed('/test_remote_firebase');
                     },
                     child: Text('Remote firebase')),
+                TextButton(
+                    onPressed: () {
+                      Get.toNamed('/test_cloud_messaging');
+                    },
+                    child: Text('Cloud messaging')),
               ],
             ),
           ],
