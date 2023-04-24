@@ -36,7 +36,7 @@ class _HealthBookViewState extends State<HealthBookView> {
       ),
       body: Obx(() {
         return controller.isLoading.isTrue
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
             : SingleChildScrollView(
@@ -67,22 +67,25 @@ class _HealthBookViewState extends State<HealthBookView> {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 3,
                         blurRadius: 10,
-                        offset: Offset(0, 3))
+                        offset: const Offset(0, 3))
                   ]),
               child: Card(
                 elevation: 0,
                 child: Column(
                   children: [
                     ListTile(
-                      leading: Icon(Icons.home),
+                      leading: const Icon(Icons.view_list, color: Colors.lightBlue,),
                       visualDensity: VisualDensity(vertical: -3.h),
                       title: Text(
-                          controller.listHealthBook[index].clinic.address
-                              .toString(),
-                          style: TextStyle(fontSize: 15.sp)),
+                        controller.generateServiceString(index),
+                        style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     ListTile(
-                      leading: Icon(Icons.calendar_month_outlined),
+                      leading: const Icon(
+                        Icons.calendar_month_outlined,
+                        color: Colors.lightBlue,
+                      ),
                       visualDensity: VisualDensity(vertical: -3.h),
                       title: Text(
                           DateFormat("yyyy-MM-dd")
@@ -92,34 +95,48 @@ class _HealthBookViewState extends State<HealthBookView> {
                           style: TextStyle(fontSize: 15.sp)),
                     ),
                     ListTile(
-                      leading: Icon(Icons.attach_money),
+                      leading: const Icon(
+                        Icons.home,
+                        color: Colors.lightBlue,
+                      ),
+                      visualDensity: VisualDensity(vertical: -3.h),
+                      title: Text(
+                          controller.listHealthBook[index].clinic.address
+                              .toString(),
+                          style: TextStyle(fontSize: 15.sp)),
+                    ),
+                    ListTile(
+                      leading: const Icon(
+                        Icons.attach_money,
+                        color: Colors.lightBlue,
+                      ),
                       visualDensity: VisualDensity(vertical: -3.h),
                       title: Text(
                           controller.listHealthBook[index].totalFee.toString(),
                           style: TextStyle(fontSize: 15.sp)),
                     ),
-                    Theme(
-                      data: Theme.of(context)
-                          .copyWith(dividerColor: Colors.transparent),
-                      child: ExpansionTile(
-                        title: Text("Dịch vụ"),
-                        children: List.generate(
-                            controller.listHealthBook[index].eHealthBookServices
-                                .length, (i) {
-                          return Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 5.h, horizontal: 16.w),
-                              child: Text(
-                                  controller.listHealthBook[index]
-                                      .eHealthBookServices[i].service.name,
-                                  style: TextStyle(fontSize: 15.sp)),
-                            ),
-                          );
-                        }),
-                      ),
-                    )
+                    // Theme(
+                    //   data: Theme.of(context)
+                    //       .copyWith(dividerColor: Colors.transparent),
+                    //   child: ExpansionTile(
+                    //     title: Text("Dịch vụ"),
+                    //     children: List.generate(
+                    //         controller.listHealthBook[index].eHealthBookServices
+                    //             .length, (i) {
+                    //       return Align(
+                    //         alignment: Alignment.centerLeft,
+                    //         child: Padding(
+                    //           padding: EdgeInsets.symmetric(
+                    //               vertical: 5.h, horizontal: 16.w),
+                    //           child: Text(
+                    //               controller.listHealthBook[index]
+                    //                   .eHealthBookServices[i].service.name,
+                    //               style: TextStyle(fontSize: 15.sp)),
+                    //         ),
+                    //       );
+                    //     }),
+                    //   ),
+                    // )
                   ],
                 ),
               ),

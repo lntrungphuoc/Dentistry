@@ -18,9 +18,8 @@ class HealthBookController extends GetxController {
   RxBool isLoading = false.obs;
 
   void getHealthBookByCustomerId() async {
-
     showLoading();
-    
+
     var customer = await SecureStorage.getLoggedInCustomer();
 
     var response = await _healthBookRepostiory.getAll(customer.id);
@@ -29,8 +28,7 @@ class HealthBookController extends GetxController {
 
     if (response != null) {
       listHealthBook = response.obs;
-    }
-    else {
+    } else {
       print('No eHealthBook data is found');
     }
   }
@@ -41,5 +39,17 @@ class HealthBookController extends GetxController {
 
   hideLoading() {
     isLoading.toggle();
+  }
+
+  String generateServiceString(int index) {
+    var res = "";
+    int length = listHealthBook[index].eHealthBookServices.length;
+    for (int i = 0; i < length - 1; i++) {
+      res =
+          "$res${listHealthBook[index].eHealthBookServices[i].service.name}, ";
+    }
+    res = res +
+        listHealthBook[index].eHealthBookServices[length - 1].service.name;
+    return res;
   }
 }

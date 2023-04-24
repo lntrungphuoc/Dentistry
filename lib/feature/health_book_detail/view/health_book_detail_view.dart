@@ -59,23 +59,30 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 3,
                                 blurRadius: 10,
-                                offset: Offset(0, 3))
+                                offset: const Offset(0, 3))
                           ]),
                       child: Card(
                         elevation: 0,
                         child: Column(
                           children: [
                             ListTile(
-                              leading: Icon(Icons.view_list),
+                              leading: const Icon(
+                                Icons.view_list,
+                                color: Colors.lightBlue,
+                              ),
                               visualDensity: VisualDensity(vertical: -3.h),
                               title: Text(
                                 controller.generateServiceString(index),
                                 style: TextStyle(
-                                    fontSize: 15.sp, color: Colors.blue),
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             ListTile(
-                              leading: Icon(Icons.person),
+                              leading: const Icon(
+                                Icons.person,
+                                color: Colors.lightBlue,
+                              ),
                               visualDensity: VisualDensity(vertical: -3.h),
                               title: Text(
                                 controller.generateDoctorString(index),
@@ -85,7 +92,10 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                               ),
                             ),
                             ListTile(
-                              leading: Icon(Icons.edit_document),
+                              leading: const Icon(
+                                Icons.edit_document,
+                                color: Colors.lightBlue,
+                              ),
                               visualDensity: VisualDensity(vertical: -3.h),
                               title: Text(
                                   controller
@@ -94,7 +104,10 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                                   style: TextStyle(fontSize: 15.sp)),
                             ),
                             ListTile(
-                              leading: Icon(Icons.medication_outlined),
+                              leading: const Icon(
+                                Icons.medication_outlined,
+                                color: Colors.lightBlue,
+                              ),
                               visualDensity: VisualDensity(vertical: -3.h),
                               title: Text(
                                   controller
@@ -106,7 +119,7 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                               data: Theme.of(context)
                                   .copyWith(dividerColor: Colors.transparent),
                               child: ExpansionTile(
-                                title: Text("Tài liệu"),
+                                title: const Text("Tài liệu"),
                                 children: List.generate(
                                     controller.listHealthBookDetail[index]
                                         .attachments.length, (i) {
@@ -117,7 +130,7 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                                           vertical: 5.h, horizontal: 16.w),
                                       child: TextButton.icon(
                                         onPressed: () async {
-                                         await controller.openFile(
+                                          await controller.openFile(
                                               url: controller
                                                   .listHealthBookDetail[index]
                                                   .attachments[i]
@@ -137,7 +150,7 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
                                                 .attachments[i]
                                                 .fileName,
                                             style: TextStyle(fontSize: 15.sp)),
-                                        icon: Icon(Icons.download),
+                                        icon: const Icon(Icons.download),
                                       ),
                                     ),
                                   );
@@ -155,6 +168,4 @@ class _HealthBookDetailViewState extends State<HealthBookDetailView> {
       bottomNavigationBar: getFooter(),
     );
   }
-
-  
 }
