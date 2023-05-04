@@ -1,6 +1,7 @@
 import 'package:app_dentristy_mobile/core/widget/footer.dart';
 import 'package:app_dentristy_mobile/feature/health_book/binding/health_book_biding.dart';
 import 'package:app_dentristy_mobile/feature/health_book/controller/health_book_controller.dart';
+import 'package:app_dentristy_mobile/service/implementations/notify_services.dart';
 import 'package:app_dentristy_mobile/theme/extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,6 +18,7 @@ class HealthBookView extends StatefulWidget {
 }
 
 class _HealthBookViewState extends State<HealthBookView> {
+  DateFormat formatter = DateFormat('dd-MM-yyyy hh:mm');
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<HealthBookController>();
@@ -74,11 +76,15 @@ class _HealthBookViewState extends State<HealthBookView> {
                 child: Column(
                   children: [
                     ListTile(
-                      leading: const Icon(Icons.view_list, color: Colors.lightBlue,),
+                      leading: const Icon(
+                        Icons.view_list,
+                        color: Colors.lightBlue,
+                      ),
                       visualDensity: VisualDensity(vertical: -3.h),
                       title: Text(
                         controller.generateServiceString(index),
-                        style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 15.sp, fontWeight: FontWeight.bold),
                       ),
                     ),
                     ListTile(
@@ -115,28 +121,64 @@ class _HealthBookViewState extends State<HealthBookView> {
                           controller.listHealthBook[index].totalFee.toString(),
                           style: TextStyle(fontSize: 15.sp)),
                     ),
-                    // Theme(
-                    //   data: Theme.of(context)
-                    //       .copyWith(dividerColor: Colors.transparent),
-                    //   child: ExpansionTile(
-                    //     title: Text("Dịch vụ"),
-                    //     children: List.generate(
-                    //         controller.listHealthBook[index].eHealthBookServices
-                    //             .length, (i) {
-                    //       return Align(
-                    //         alignment: Alignment.centerLeft,
-                    //         child: Padding(
-                    //           padding: EdgeInsets.symmetric(
-                    //               vertical: 5.h, horizontal: 16.w),
-                    //           child: Text(
-                    //               controller.listHealthBook[index]
-                    //                   .eHealthBookServices[i].service.name,
-                    //               style: TextStyle(fontSize: 15.sp)),
-                    //         ),
-                    //       );
-                    //     }),
-                    //   ),
-                    // )
+                    Theme(
+                      data: Theme.of(context)
+                          .copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        title: Text("Tái khám"),
+                        children: [
+                          ListTile(
+                            leading: const Icon(
+                              Icons.calendar_month_outlined,
+                              color: Colors.lightBlue,
+                            ),
+                            trailing: IconButton(
+                                onPressed: () {
+                                  NotificationService notifyService =
+                                      NotificationService();
+                                  // var examDate = DateTime.parse(
+                                  //     '2023-05-05 10:35:00.0000000');
+                                  var parsedDate = controller
+                                      .listHealthBook[index].reExaminationDate!
+                                      .subtract(Duration(days: 1));
+                                  var strDate = formatter.format(parsedDate);
+                                  notifyService.scheduleNotification(
+                                      title: 'Thông báo',
+                                      body:
+                                          'Bạn sẽ có lịch tái khám vào ${strDate}',
+                                      scheduledNotificationDateTime:
+                                          parsedDate);
+                                },
+                                icon: const Icon(
+                                  Icons.notifications,
+                                  color: Colors.lightBlue,
+                                )),
+                            visualDensity: VisualDensity(vertical: -3.h),
+                            title: Text(
+                                controller.listHealthBook[index]
+                                            .reExaminationDate ==
+                                        null
+                                    ? ''
+                                    : formatter.format(controller
+                                        .listHealthBook[index]
+                                        .reExaminationDate!),
+                                style: TextStyle(fontSize: 15.sp)),
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.book,
+                              color: Colors.lightBlue,
+                            ),
+                            visualDensity: VisualDensity(vertical: -3.h),
+                            title: Text(
+                                controller.listHealthBook[index].note == null
+                                    ? ''
+                                    : controller.listHealthBook[index].note!,
+                                style: TextStyle(fontSize: 15.sp)),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
