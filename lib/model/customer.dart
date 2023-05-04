@@ -5,22 +5,22 @@ class Customer {
     required this.id,
     required this.customerName,
     required this.phoneNumber,
-    required this.address,
+    this.address,
     required this.password,
-    required this.cccd,
+    this.cccd,
     required this.bhyt,
     required this.createdDate,
-    required this.modifiedDate,
+    this.modifiedDate,
     required this.createdBy,
-    required this.modifiedBy,
+    this.modifiedBy,
      this.eHealthBooks,
   });
   late final int id;
   late final String customerName;
   late final String phoneNumber;
-  late final String address;
+  late final String? address;
   late final String password;
-  late final String cccd;
+  late final String? cccd;
   late final String bhyt;
   late final DateTime createdDate;
   late final DateTime? modifiedDate;
@@ -32,9 +32,9 @@ class Customer {
     id = json['id'];
     customerName = json['customerName'];
     phoneNumber = json['phoneNumber'];
-    address = json['address'];
+    address = json['address'] == null ? null : json['address'];
     password = json['password'];
-    cccd = json['cccd'];
+    cccd = json['cccd'] == null ? null : json['cccd'];
     bhyt = json['bhyt'];
     createdDate = DateTime.parse(json['createdDate']);
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
@@ -48,9 +48,9 @@ class Customer {
     _data['id'] = id;
     _data['customerName'] = customerName;
     _data['phoneNumber'] = phoneNumber;
-    _data['address'] = address;
+    _data['address'] = address == null ? null : address;
     _data['password'] = password;
-    _data['cccd'] = cccd;
+    _data['cccd'] = cccd == null ? null : cccd;
     _data['bhyt'] = bhyt;
     _data['createdDate'] = createdDate == null ? null : createdDate.toIso8601String();
     _data['modifiedDate'] = modifiedDate == null ? null : modifiedDate!.toIso8601String();

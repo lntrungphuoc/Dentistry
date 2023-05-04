@@ -5,6 +5,7 @@ class News {
     required this.content,
     required this.url,
     required this.thumbnail,
+    required this.forMobile,
     required this.createdDate,
     required this.modifiedDate,
     required this.createdBy,
@@ -15,6 +16,7 @@ class News {
   late final String content;
   late final String url;
   late final String thumbnail;
+  late final bool forMobile;
   late final DateTime createdDate;
   late final DateTime? modifiedDate;
   late final int createdBy;
@@ -26,6 +28,7 @@ class News {
     content = json['content'];
     url = json['url'];
     thumbnail = json['thumbnail'];
+    forMobile = json['forMobile'];
     createdDate = DateTime.parse(json['createdDate']);
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
     createdBy = json['createdBy'];
@@ -39,6 +42,7 @@ class News {
     _data['content'] = content;
     _data['url'] = url;
     _data['thumbnail'] = thumbnail;
+    _data['forMobile'] = forMobile;
     _data['createdDate'] = createdDate;
     _data['modifiedDate'] = modifiedDate;
     _data['createdBy'] = createdBy;

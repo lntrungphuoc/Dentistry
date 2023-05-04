@@ -162,11 +162,11 @@ class _HomeViewState extends State<HomeView>
         ),
       },
       {
-        "name": "Phòng khám",
+        "name": "Bài đăng",
         "color": const Color.fromARGB(255, 201, 228, 238),
-        "path": "/clinic",
+        "path": "/news_list",
         "icon": const Icon(
-          Icons.local_hospital,
+          Icons.chrome_reader_mode,
           size: 50,
           color: LightColor.lightBlue,
         ),

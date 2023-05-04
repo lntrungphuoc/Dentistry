@@ -46,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
             height: 15.h,
           ),
           const Text(
-            "Sử dụng số CCCD/CMND để truy cập vào sổ sức khỏe",
+            "Sử dụng số điện thoại để truy cập vào sổ sức khỏe",
             style: TextStyle(color: Colors.grey),
           ),
           SizedBox(
@@ -77,7 +77,7 @@ class _LoginViewState extends State<LoginView> {
                           prefixIcon: Icon(Icons.person),
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(0),
-                          labelText: 'CCCD/CMND'),
+                          labelText: 'Số điện thoại'),
                     ),
                   ),
                 ),

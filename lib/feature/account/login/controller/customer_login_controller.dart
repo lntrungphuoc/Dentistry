@@ -38,7 +38,7 @@ class CustomerLoginController extends GetxController {
   void login() async {
     if (loginFormKey.currentState!.validate()) {
       var loginRequest = LoginRequest(
-          cccd: userNameController.text, password: passwordController.text);
+          phoneNumber: userNameController.text, password: passwordController.text);
       var customer = await _customerRepository.login(loginRequest);
       if (customer != null) {
         SecureStorage.saveLoggedInCustomer(customer);

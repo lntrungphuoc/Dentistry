@@ -10,6 +10,8 @@ class EHealthBook {
     required this.idClinic,
     required this.idCustomer,
     required this.checkUpDate,
+    this.reExaminationDate,
+    this.note,
     required this.createdDate,
     required this.modifiedDate,
     required this.createdBy,
@@ -24,6 +26,8 @@ class EHealthBook {
   late final int idClinic;
   late final int idCustomer;
   late final DateTime checkUpDate;
+  DateTime? reExaminationDate;
+  String? note;
   late final DateTime createdDate;
   late final DateTime? modifiedDate;
   late final int createdBy;
@@ -39,6 +43,8 @@ class EHealthBook {
     idClinic = json['idClinic'];
     idCustomer = json['idCustomer'];
     checkUpDate = DateTime.parse(json['checkUpDate']);
+    reExaminationDate = json['reExaminationDate'] == null ? null : DateTime.parse(json['reExaminationDate']);
+    note = json['note'] == null ? null : json['note'];
     createdDate = DateTime.parse(json['createdDate']);
     modifiedDate = json['modifiedDate'] == null ? null : DateTime.parse(json['modifiedDate']);
     createdBy = json['createdBy'];
@@ -56,6 +62,8 @@ class EHealthBook {
     _data['idClinic'] = idClinic;
     _data['idCustomer'] = idCustomer;
     _data['checkUpDate'] = checkUpDate;
+    _data['reExaminationDate'] = reExaminationDate;
+    _data['note'] = note;
     _data['createdDate'] = createdDate;
     _data['modifiedDate'] = modifiedDate;
     _data['createdBy'] = createdBy;

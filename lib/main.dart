@@ -10,6 +10,8 @@ import 'package:app_dentristy_mobile/feature/doctor/view/list_doctor_view.dart';
 import 'package:app_dentristy_mobile/feature/health_book/binding/health_book_biding.dart';
 import 'package:app_dentristy_mobile/feature/health_book_detail/binding/health_book_detail_binding.dart';
 import 'package:app_dentristy_mobile/feature/health_book_detail/view/health_book_detail_view.dart';
+import 'package:app_dentristy_mobile/feature/list_news/binding/list_news_binding.dart';
+import 'package:app_dentristy_mobile/feature/list_news/view/list_news_view.dart';
 import 'package:app_dentristy_mobile/feature/make-appointment/binding/make_appointment_binding.dart';
 import 'package:app_dentristy_mobile/feature/make-appointment/view/make-appointment-view.dart';
 import 'package:app_dentristy_mobile/feature/price_list/binding/price_list_binding.dart';
@@ -99,7 +101,8 @@ class MyApp extends StatelessWidget {
                   page: () => const TestRemoteFirebase()),
               GetPage(
                   name: '/test_cloud_messaging',
-                  page: () => TestCloudMessaging())
+                  page: () => TestCloudMessaging()),
+              GetPage(name: '/news_list', page: () => ListNewsView(), binding: ListNewsBinding())
             ],
             initialRoute: '/splash',
           );
