@@ -34,6 +34,22 @@ class DoctorController extends GetxController {
     }
   }
 
+  Future<void> RefreshData() async {
+    showLoading();
+
+    var response = await _doctorRepository.getAll();
+
+    hideLoading();
+
+    if (response != null) {
+      listDoctor = response.obs;
+      foundDoctors = listDoctor;
+    }
+    else {
+      print('No doctor data is found');
+    }
+  }
+
   showLoading() {
     isLoading.toggle();
   }

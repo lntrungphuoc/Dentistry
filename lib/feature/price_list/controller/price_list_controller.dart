@@ -34,6 +34,22 @@ class PriceListController extends GetxController {
     }
   }
 
+  Future<void> RefreshData() async {
+    showLoading();
+
+    var response = await _repository.getAll();
+
+    hideLoading();
+
+    if (response != null) {
+      listPriceList = response.obs;
+      foundPriceLists = listPriceList;
+    }
+    else {
+      print('No pricelist data is found');
+    }
+  }
+
   showLoading() {
     isLoading.toggle();
   }

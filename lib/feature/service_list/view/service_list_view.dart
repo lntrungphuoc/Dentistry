@@ -69,8 +69,10 @@ class _ServiceListViewState extends State<ServiceListView> {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+              : RefreshIndicator(
+                onRefresh: () => controller.RefreshData(),
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
                   child: Column(
                     children: [
                       Padding(
@@ -93,7 +95,8 @@ class _ServiceListViewState extends State<ServiceListView> {
                             ],
                           ),
                           child: TextField(
-                            onChanged: (value) => _runFilter(value, controller),
+                            onChanged: (value) =>
+                                _runFilter(value, controller),
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 16.w, vertical: 16.h),
@@ -113,8 +116,8 @@ class _ServiceListViewState extends State<ServiceListView> {
                         ),
                       ),
                       Column(
-                        children: List.generate(controller.foundServices.length,
-                            (index) {
+                        children: List.generate(
+                            controller.foundServices.length, (index) {
                           return Container(
                               margin: EdgeInsets.symmetric(
                                   vertical: 8.w, horizontal: 16.h),
@@ -174,7 +177,8 @@ class _ServiceListViewState extends State<ServiceListView> {
                       ),
                     ],
                   ),
-                );
+                ),
+              );
         }));
   }
 }

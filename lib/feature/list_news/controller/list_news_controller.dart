@@ -31,6 +31,21 @@ class ListNewsController extends GetxController {
     }
   }
 
+  Future<void> RefreshData() async {
+    showLoading();
+
+    var response = await _listNewsReposioty.getAll();
+
+    hideLoading();
+
+    if (response != null) {
+      listNews = response.obs;
+    }
+    else {
+      print('No news data is found');
+    }
+  }
+
   showLoading() {
     isLoading.toggle();
   }

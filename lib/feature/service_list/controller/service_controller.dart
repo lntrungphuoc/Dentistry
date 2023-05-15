@@ -33,6 +33,22 @@ class ServiceController extends GetxController {
     }
   }
 
+  Future<void> RefreshData() async {
+    showLoading();
+
+    final result = await _serviceRepository.getAll();
+
+    hideLoading();
+
+    if (result != null) {
+      listService = result.obs;
+      foundServices = listService;
+    } else {
+      print("No data received");
+    }
+  }
+
+
   showLoading() {
     isLoading.toggle();
   }

@@ -42,6 +42,23 @@ class HealthBookDetailController extends GetxController {
     }
   }
 
+  Future<void> refreshData() async {
+    showLoading();
+
+    var healthBookId = Get.arguments;
+
+    var response =
+        await _healthBookDetailRepository.getByHealthBookId(healthBookId);
+
+    hideLoading();
+
+    if (response != null) {
+      listHealthBookDetail = response.obs;
+    } else {
+      print('No eHealthBookDetail data is found');
+    }
+  }
+
   showLoading() {
     isLoading.toggle();
   }
