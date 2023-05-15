@@ -41,10 +41,13 @@ class _HealthBookViewState extends State<HealthBookView> {
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: list_health_book_card(controller),
-              );
+            : RefreshIndicator(
+              onRefresh: () => controller.RefreshData(),
+              child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: list_health_book_card(controller),
+                ),
+            );
       }),
       bottomNavigationBar: getFooter(),
     );
@@ -94,10 +97,7 @@ class _HealthBookViewState extends State<HealthBookView> {
                       ),
                       visualDensity: VisualDensity(vertical: -3.h),
                       title: Text(
-                          DateFormat("yyyy-MM-dd")
-                              .format(
-                                  controller.listHealthBook[index].checkUpDate)
-                              .toString(),
+                          formatter.format(controller.listHealthBook[index].checkUpDate),
                           style: TextStyle(fontSize: 15.sp)),
                     ),
                     ListTile(
@@ -141,7 +141,8 @@ class _HealthBookViewState extends State<HealthBookView> {
                                   var parsedDate = controller
                                       .listHealthBook[index].reExaminationDate!
                                       .subtract(Duration(days: 1));
-                                  var strDate = formatter.format(parsedDate);
+                                  var strDate = formatter.format(controller
+                                      .listHealthBook[index].reExaminationDate!);
                                   notifyService.scheduleNotification(
                                       title: 'Thông báo',
                                       body:

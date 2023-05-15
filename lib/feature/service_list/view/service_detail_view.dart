@@ -8,6 +8,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../core/system_state.dart';
 import '../../../theme/text_styles.dart';
 
 class ServiceDetailView extends StatelessWidget {
@@ -17,6 +18,7 @@ class ServiceDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var state = Get.put(SystemState());
     TextStyle titleStyle = TextStyles.title.copyWith(fontSize: 25.sp).bold;
     return Scaffold(
       backgroundColor: LightColor.background,
@@ -105,6 +107,7 @@ class ServiceDetailView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.r)),
               ),
               onPressed: () {
+                state.changeTab(1.obs);
                 Get.toNamed('/make_appointment');
               },
               child: Text(

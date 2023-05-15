@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app_dentristy_mobile/core/repository/interfaces/i_health_book_repository.dart';
 import 'package:app_dentristy_mobile/core/secure_storage.dart';
 import 'package:app_dentristy_mobile/model/e_healthbook.dart';
@@ -18,6 +20,22 @@ class HealthBookController extends GetxController {
   RxBool isLoading = false.obs;
 
   void getHealthBookByCustomerId() async {
+    showLoading();
+
+    var customer = await SecureStorage.getLoggedInCustomer();
+
+    var response = await _healthBookRepostiory.getAll(customer.id);
+
+    hideLoading();
+
+    if (response != null) {
+      listHealthBook = response.obs;
+    } else {
+      print('No eHealthBook data is found');
+    }
+  }
+
+  Future<void> RefreshData() async {
     showLoading();
 
     var customer = await SecureStorage.getLoggedInCustomer();

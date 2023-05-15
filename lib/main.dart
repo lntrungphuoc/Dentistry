@@ -59,6 +59,9 @@ class MyApp extends StatelessWidget {
         designSize: Size(360, 780),
         builder: (context, child) {
           return GetMaterialApp(
+            // theme: ThemeData(
+            //   fontFamily: 'Nunito'
+            // ),
             debugShowCheckedModeBanner: false,
             // home: SideMenu(),
             getPages: [

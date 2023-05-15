@@ -241,7 +241,7 @@ class _HomeViewState extends State<HomeView>
                               CircleAvatar(
                                 radius: 25.r,
                                 backgroundImage:
-                                    AssetImage('assets/image/profile_2.jpg'),
+                                    AssetImage('${systemState.userName.value == "" ? "assets/image/user.jpg" : "assets/image/profile_2.jpg"}'),
                               )
                             ],
                           ),
