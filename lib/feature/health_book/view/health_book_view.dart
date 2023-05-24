@@ -44,7 +44,7 @@ class _HealthBookViewState extends State<HealthBookView> {
             : RefreshIndicator(
               onRefresh: () => controller.RefreshData(),
               child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+                  physics: AlwaysScrollableScrollPhysics(),
                   child: list_health_book_card(controller),
                 ),
             );
